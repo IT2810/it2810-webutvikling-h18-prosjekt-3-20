@@ -5,7 +5,6 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
 
 const mockedItems = [{ name: 'test', date: '2017-08-07' }];
 
@@ -19,6 +18,7 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
+  // eslint-disable-next-line react/prop-types
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -37,6 +37,7 @@ const LinksStack = createStackNavigator({
 
 LinksStack.navigationOptions = {
   tabBarLabel: 'Links',
+  // eslint-disable-next-line react/prop-types
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -45,22 +46,7 @@ LinksStack.navigationOptions = {
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
-    />
-  ),
-};
-
 export default createBottomTabNavigator({
   HomeStack,
   LinksStack,
-  SettingsStack,
 });
