@@ -8,13 +8,14 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "lint": "eslint . -f stylish",
-    "test": "node ./node_modules/jest-expo/bin/jest.js",
-    "test:watch": "node ./node_modules/jest-expo/bin/jest.js --watchAll",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
     "precommit": "npm run lint",
-    "prepush": "node ./node_modules/jest-expo/bin/jest.js --coverage"
+    "prepush": "jest --coverage"
   },
   "jest": {
     "preset": "jest-expo",
+    "setupTestFrameworkScriptFile": "<rootDir>setupTests.js",
     "coverageThreshold": {
       "global": {
         "branches": 80,
@@ -35,6 +36,8 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "eslint": "^5.6.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -42,7 +45,9 @@
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-native": "^3.3.0",
     "husky": "^1.1.0",
+    "jest-enzyme": "^6.1.2",
     "jest-expo": "30.0.0",
+    "react-dom": "^16.3.1",
     "react-test-renderer": "^16.5.2"
   }
 }
