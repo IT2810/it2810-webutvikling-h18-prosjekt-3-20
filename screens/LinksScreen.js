@@ -2,11 +2,23 @@ import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 
+import colors from '../constants/Colors';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 15,
+    backgroundColor: colors.backgroundColor,
+  },
+});
+
+
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
   };
 
+  // eslint-disable-next-line class-methods-use-this
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -17,11 +29,3 @@ export default class LinksScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
-});

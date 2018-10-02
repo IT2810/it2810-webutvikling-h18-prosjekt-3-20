@@ -19,7 +19,16 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
-  render() {
+  state = {
+    currentDate: new Date().toString(),
+    todos: [],
+  };
+
+  componentDidMount() {
+    this.props.getTodos().then(todos => this.setState({ todos }));
+  }
+
+  render () {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -34,21 +43,10 @@ export default class HomeScreen extends React.Component {
               style={styles.welcomeImage}
             />
           </View>
-
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <Calendar onDayPress={(day) => console.log(`Selected`, day)}/>
-
-            {/*<View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>*/}
-              {/*<MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>*/}
-            {/*</View>*/}
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
           </View>
 
           <View style={styles.helpContainer}>
@@ -57,19 +55,11 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-
-        {/*<View style={styles.tabBarInfoContainer}>*/}
-          {/*<Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>*/}
-
-          {/*<View style={[styles.codeHighlightContainer, styles.navigationFilename]}>*/}
-            {/*<MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>*/}
-          {/*</View>*/}
-        {/*</View>*/}
       </View>
     );
   }
 
-  _maybeRenderDevelopmentModeWarning() {
+  _maybeRenderDevelopmentModeWarning () {
     if (__DEV__) {
       const learnMoreButton = (
         <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
