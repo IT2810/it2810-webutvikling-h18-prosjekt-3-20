@@ -3,6 +3,13 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+});
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -30,7 +37,9 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () => {
     return Promise.all([
       Asset.loadAsync([
+        // eslint-disable-next-line global-require
         require('./assets/images/robot-dev.png'),
+        // eslint-disable-next-line global-require
         require('./assets/images/robot-prod.png'),
       ]),
       Font.loadAsync({
@@ -38,6 +47,7 @@ export default class App extends React.Component {
         ...Icon.Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
+        // eslint-disable-next-line global-require
         'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
       }),
     ]);
@@ -53,10 +63,3 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});

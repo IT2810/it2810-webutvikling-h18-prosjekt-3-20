@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
 import { MonoText } from '../components/StyledText';
 
@@ -36,10 +37,12 @@ export default class HomeScreen extends React.Component {
             {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
+            
+            <Calendar onDayPress={(day) => console.log(`Selected`, day)}/>
 
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
+            {/*<View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>*/}
+              {/*<MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>*/}
+            {/*</View>*/}
 
             <Text style={styles.getStartedText}>
               Change this text and your app will automatically reload.
@@ -53,13 +56,13 @@ export default class HomeScreen extends React.Component {
           </View>
         </ScrollView>
 
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>
+        {/*<View style={styles.tabBarInfoContainer}>*/}
+          {/*<Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>*/}
+        
+          {/*<View style={[styles.codeHighlightContainer, styles.navigationFilename]}>*/}
+            {/*<MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>*/}
+          {/*</View>*/}
+        {/*</View>*/}
       </View>
     );
   }
