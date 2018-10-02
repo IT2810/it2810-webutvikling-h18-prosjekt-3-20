@@ -10,6 +10,7 @@
     "lint": "eslint . -f stylish",
     "test": "jest",
     "test:watch": "jest --watchAll",
+    "test:view-coverage": "http-server ./coverage/lcov-report/",
     "precommit": "npm run lint",
     "prepush": "jest --coverage"
   },
@@ -44,6 +45,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-native": "^3.3.0",
+    "http-server": "^0.11.1",
     "husky": "^1.1.0",
     "jest-enzyme": "^6.1.2",
     "jest-expo": "30.0.0",
