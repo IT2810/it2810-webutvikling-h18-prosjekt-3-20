@@ -12,6 +12,7 @@ import { WebBrowser } from 'expo';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
 import { MonoText } from '../components/StyledText';
+import TodoInput from '../components/Todo/TodoInput';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -32,6 +33,7 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
+            <TodoInput/>
             <Image
               source={
                 __DEV__
@@ -45,25 +47,6 @@ export default class HomeScreen extends React.Component {
             {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <Calendar
-              current={this.state.currentDate}
-              markedDates={{
-              [this.state.currentDate]: {
-                selected: true,
-                disableTouchEvent: true,
-                selectedDotColor: 'blue'
-              }
-            }}
-              onDayPress={day => this.setState({ currentDate: day.dateString })}/>
-
-            {/*<View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>*/}
-            {/*<MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>*/}
-            {/*</View>*/}
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
           </View>
 
           <View style={styles.helpContainer}>
@@ -72,14 +55,6 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-
-        {/*<View style={styles.tabBarInfoContainer}>*/}
-        {/*<Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>*/}
-
-        {/*<View style={[styles.codeHighlightContainer, styles.navigationFilename]}>*/}
-        {/*<MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>*/}
-        {/*</View>*/}
-        {/*</View>*/}
       </View>
     );
   }
