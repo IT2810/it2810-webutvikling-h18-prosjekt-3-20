@@ -8,7 +8,7 @@ const storeName = 'PersonalIM';
  * @param {string} key Unique key to identify the data by
  * @return {string}
  * */
-const generateId = key => `@${storeName}:${key}`;
+export const generateId = key => `@${storeName}:${key}`;
 
 export async function save(key, data) {
   if (!key) {
@@ -27,5 +27,7 @@ export async function save(key, data) {
 }
 
 export async function getByKey(key) {
-  return AsyncStorage.getItem(generateId(key));
+  const data = await AsyncStorage.getItem(generateId(key));
+
+  return data ? JSON.parse(data) : null;
 }
