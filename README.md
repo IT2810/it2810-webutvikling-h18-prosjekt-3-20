@@ -1,9 +1,42 @@
 Personal Information Manager
 ============================
 
-## Kalender
+# Kalender
 
 https://github.com/wix/react-native-calendars
+
+# Dele props med screen komponenter
+
+I flere tilfeller ønsker vi at screen komponenter skal få tilgang til ekstra props.
+Eksempelvis vil vi kanskje at komponenten skal få tilgang til en funksjon
+som laster inn data fra server eller lokalt lager.
+
+```jsx
+const HomeStack = createStackNavigator({
+  Home: {
+    screen: props => <HomeScreen
+      // Sender videre eventuelle props vi mottar fra oven
+      {...props}
+      // Legg inn dine egne props under
+
+      getTodos: () => ['todo 1', 'todo 2'] // Eksempel på en funksjon som prop
+    />,
+  },
+});
+```
+
+Slik trenger screen komponenten kun å ha et forhold til en property,
+i stedet for å måtte importere biblioteket funksjonen selv.
+
+```jsx
+// Inne i render funksjonen til en komponent
+render() {
+    this.props.getTodos(); // ['todo 1', 'todo 2']
+}
+```
+
+I tillegg blir det vesentlig enklere å teste, fordi vi sparer oss fra
+å måtte "mocke" en intern funksjon, vi kan i stedet sende inn en dummy funksjon til komponenten.
 
 # Testing
 
