@@ -10,6 +10,7 @@
     "lint": "eslint . -f stylish",
     "test": "jest",
     "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage",
     "test:view-coverage": "http-server ./coverage/lcov-report/",
     "precommit": "npm run lint",
     "prepush": "jest --coverage"
@@ -19,9 +20,9 @@
     "setupTestFrameworkScriptFile": "<rootDir>setupTests.js",
     "coverageThreshold": {
       "global": {
-        "branches": 80,
-        "functions": 80,
-        "lines": 80,
+        "branches": 75,
+        "functions": 65,
+        "lines": 75,
         "statements": -10
       }
     }

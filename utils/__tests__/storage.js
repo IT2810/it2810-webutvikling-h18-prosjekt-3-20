@@ -24,6 +24,10 @@ describe('storage', () => {
     expect(JSON.parse(actualData)).toEqual(expectedData);
   });
 
+  it('should complain if key is empty', async () => {
+    await expect(save('', {})).rejects.toThrow(Error);
+  });
+
   it('should getByKey from AsyncStorage', async () => {
     const key = 'one';
     const expectedData = { message: 'hello' };
