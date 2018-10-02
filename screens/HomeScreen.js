@@ -12,6 +12,7 @@ import { WebBrowser } from 'expo';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
 import { MonoText } from '../components/StyledText';
+import TodoInput from '../components/Todo/TodoInput';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -23,6 +24,7 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
+            <TodoInput/>
             <Image
               source={
                 __DEV__
@@ -37,7 +39,7 @@ export default class HomeScreen extends React.Component {
             {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
-            
+
             <Calendar onDayPress={(day) => console.log(`Selected`, day)}/>
 
             {/*<View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>*/}
@@ -58,7 +60,7 @@ export default class HomeScreen extends React.Component {
 
         {/*<View style={styles.tabBarInfoContainer}>*/}
           {/*<Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>*/}
-        
+
           {/*<View style={[styles.codeHighlightContainer, styles.navigationFilename]}>*/}
             {/*<MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>*/}
           {/*</View>*/}
