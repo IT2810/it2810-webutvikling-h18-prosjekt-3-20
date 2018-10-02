@@ -11,10 +11,18 @@
     "test": "node ./node_modules/jest-expo/bin/jest.js",
     "test:watch": "node ./node_modules/jest-expo/bin/jest.js --watchAll",
     "precommit": "npm run lint",
-    "prepush": "npm test"
+    "prepush": "node ./node_modules/jest-expo/bin/jest.js --coverage"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": -10
+      }
+    }
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
