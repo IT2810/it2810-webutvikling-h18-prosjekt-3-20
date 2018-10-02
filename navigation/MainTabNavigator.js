@@ -7,8 +7,14 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
+const mockedItems = [{ name: 'test', date: '2017-08-07' }];
+
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: {
+    screen: props => <HomeScreen
+      {...props}
+      getTodos={async () => mockedItems} />,
+  },
 });
 
 HomeStack.navigationOptions = {
