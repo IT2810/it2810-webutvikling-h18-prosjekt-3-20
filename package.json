@@ -8,7 +8,9 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "lint": "eslint . -f stylish",
-    "test": "node ./node_modules/jest-expo/bin/jest.js --watchAll"
+    "test": "node ./node_modules/jest-expo/bin/jest.js --watchAll",
+    "precommit": "npm run lint",
+    "prepush": "npm test"
   },
   "jest": {
     "preset": "jest-expo"
@@ -29,6 +31,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-native": "^3.3.0",
+    "husky": "^1.1.0",
     "jest-expo": "30.0.0"
   }
 }
