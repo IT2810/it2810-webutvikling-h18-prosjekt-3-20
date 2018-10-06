@@ -5,9 +5,7 @@ import TodoInput from './TodoInput';
 
 export default class Todo extends Component {
   static propTypes = {
-    text: PropTypes.shape({
-      text: PropTypes.string.isRequired,
-    }),
+    onTodoAdd: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -15,6 +13,7 @@ export default class Todo extends Component {
   };
 
   render() {
-    return <div className="Todo"><TodoInput/></div>;
+    return (
+      <TodoInput onTodoAdd={this.props.onTodoAdd}/>);
   }
 }

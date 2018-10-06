@@ -10,9 +10,7 @@ const mockedItems = [{ name: 'test', date: '2017-08-07' }];
 
 const HomeStack = createStackNavigator({
   Home: {
-    screen: props => <HomeScreen
-      {...props}
-      getTodos={async () => mockedItems} />,
+    screen: props => <HomeScreen {...props} getTodos={async () => mockedItems} />,
   },
 });
 
