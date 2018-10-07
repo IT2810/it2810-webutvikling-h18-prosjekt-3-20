@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     paddingTop: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto',
     display: 'flex',
     flexDirection: 'row',
   },
@@ -75,7 +77,7 @@ export default class TodoInput extends Component {
             onPress={() => {
               this.props.onTodoAdd({
                 name: this.state.text,
-                key: new Date().toString(),
+                date: new Date().toString(),
               });
             }}
           />

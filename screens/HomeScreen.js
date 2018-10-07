@@ -46,7 +46,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <Todo onTodoAdd={this.addTodoItem}/>
+          <Todo onTodoAdd={this.addTodoItem} todos={this.state.todos}/>
         </ScrollView>
       </View>
     );
