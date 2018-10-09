@@ -37,7 +37,6 @@ export const context = {
    * */
   getTodos: async function getTodos() {
     const storedTodos = await getByKey(storageKey);
-
     if (!storedTodos) {
       this.todos = [];
     } else {

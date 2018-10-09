@@ -4,7 +4,6 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-
 import { TodoContext } from '../utils/TodoContext';
 
 import Todo from '../components/Todo/index';
@@ -25,10 +24,6 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
-  static propTypes = {
-    getTodos: PropTypes.func.isRequired,
-  };
-
   state = {
     currentDate: new Date().toString(),
     todos: [],
@@ -47,22 +42,19 @@ export default class HomeScreen extends React.Component {
     item.completed = !item.completed;
   };
 
-  componentDidMount() {
-    this.props.getTodos().then(todos => this.setState({ todos }));
-  }
-
   sortTodoList() {
     return this.state.todos.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
   }
 
+  // eslint-disable-next-line
   render() {
     return <View style={styles.container}>
       <TodoContext.Consumer>
-        {({ pushTodo }) => <ScrollView
+        {({ todos, pushTodo, editCompletedState }) => <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
 
-          <Todo onTodoAdd={pushTodo} todos={this.sortTodoList()}/>
+          <Todo onTodoAdd={pushTodo} todos={todos} onCheckBoxPress={editCompletedState}/>
         </ScrollView>}
       </TodoContext.Consumer>
     </View>;

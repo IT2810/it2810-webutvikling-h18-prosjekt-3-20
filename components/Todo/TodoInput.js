@@ -13,6 +13,7 @@ import Colors from '../../constants/Colors';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
+    marginTop: '7%',
     marginLeft: '5%',
     marginRight: '5%',
     width: 'auto',
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   dateContainer: {
+    marginTop: 10,
     display: 'flex',
     flexDirection: 'row',
     width: 'auto',

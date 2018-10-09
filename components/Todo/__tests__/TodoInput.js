@@ -16,6 +16,7 @@ describe('<TodoInput/>', () => {
 
     const text = 'hello';
     const date = '2018-10-09 10:25:00';
+    const completed = false;
 
     // Calls the internal proxy function to update the text and date
     wrapper.instance().changeTextHandler(text);
@@ -24,6 +25,6 @@ describe('<TodoInput/>', () => {
     wrapper.find('Button').simulate('press');
 
     expect(spy.mock.calls.length).toBe(1);
-    expect(spy).toHaveBeenCalledWith({ date, name: text });
+    expect(spy).toHaveBeenCalledWith({ completed, date, name: text });
   });
 });

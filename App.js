@@ -53,11 +53,16 @@ export default class App extends React.Component {
    * @return {Promise}
    * */
   pushTodo = async (todo) => {
+    // eslint-disable-next-line no-param-reassign
+    todo.id = `${todo.name}${todo.date}`;
     const savedTodos = await context.saveTodos(this.state.todos.concat([todo]));
-
     this.setState({ todos: savedTodos });
-
     return savedTodos;
+  };
+
+  editCompletedState = (todoItem) => {
+    const item = this.state.todos.find(obj => obj.id === todoItem.id);
+    item.completed = !item.completed;
   };
 
   render() {
@@ -74,6 +79,7 @@ export default class App extends React.Component {
       <TodoContext.Provider value={{
         todos: this.state.todos,
         pushTodo: this.pushTodo,
+        editCompletedState: this.editCompletedState,
       }}>
         <AppNavigator/>
       </TodoContext.Provider>
