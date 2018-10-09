@@ -10,7 +10,8 @@ import Colors from '../../constants/Colors';
 
 const createStyles = checked => StyleSheet.create({
   container: {
-    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -18,9 +19,13 @@ const createStyles = checked => StyleSheet.create({
   checkbox: {
     flex: 1,
   },
-  text: {
-    flex: 4,
-    paddingLeft: 10,
+  name: {
+    flex: 5,
+    color: checked ? Colors.completedTodo : Colors.black,
+    textDecorationLine: checked ? 'line-through' : 'none',
+  },
+  date: {
+    flex: 2,
     color: checked ? Colors.completedTodo : Colors.black,
     textDecorationLine: checked ? 'line-through' : 'none',
   },
@@ -30,6 +35,7 @@ const checkboxWrapperStyle = StyleSheet.create({
   container: {
     backgroundColor: Colors.transparent,
     borderWidth: 0,
+    width: 40,
   },
 });
 
@@ -56,10 +62,10 @@ export default class TodoItem extends Component {
             this.setState({ checked: !this.state.checked });
           }}
         />
-        <Text style={styles.text}>
+        <Text style={styles.name}>
           {this.props.item.name}
         </Text>
-        <Text style={styles.text}>
+        <Text style={styles.date}>
           {this.props.item.date}
         </Text>
       </View>
