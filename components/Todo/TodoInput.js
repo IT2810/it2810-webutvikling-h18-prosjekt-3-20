@@ -73,6 +73,10 @@ export default class TodoInput extends Component {
     this.setState({ text });
   };
 
+  changeSelectedDate = (date) => {
+    this.setState({ date });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -89,9 +93,7 @@ export default class TodoInput extends Component {
             confirmBtnText='Confirm'
             cancelBtnText='Cancel'
             showIcon={true}
-            onDateChange={(date) => {
-              this.setState({ date });
-            }}
+            onDateChange={this.changeSelectedDate}
           />
           <View style={styles.spacer}/>
         </View>
