@@ -10,25 +10,21 @@ import { Button } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
 import Colors from '../../constants/Colors';
 
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
+    marginLeft: '5%',
+    marginRight: '5%',
+    width: 'auto',
   },
   textContainer: {
     display: 'flex',
     flexDirection: 'row',
-
-    marginLeft: '5%',
-    marginRight: '5%',
-    width: 'auto',
     paddingTop: 10,
   },
   dateContainer: {
     display: 'flex',
     flexDirection: 'row',
-    marginLeft: '5%',
-    marginRight: '5%',
     width: 'auto',
   },
   textInput: {
@@ -38,7 +34,9 @@ const styles = StyleSheet.create({
     height: 35,
     width: 250,
   },
-  header: {},
+  header: {
+    fontSize: 20,
+  },
   button: {
     paddingTop: 0,
     paddingBottom: 0,
@@ -59,7 +57,8 @@ export default class TodoInput extends Component {
     super(props);
     this.state = {
       text: '',
-      date: null,
+      // Get today at YYYY-MM-DD format
+      date: new Date().toISOString().slice(0, 10),
     };
   }
 
@@ -112,6 +111,7 @@ export default class TodoInput extends Component {
               this.props.onTodoAdd({
                 name: this.state.text,
                 date: this.state.date,
+                completed: false,
               });
             }}
           />

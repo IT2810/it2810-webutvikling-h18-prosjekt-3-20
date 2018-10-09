@@ -25,15 +25,44 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
-  // eslint-disable-next-line class-methods-use-this
+  static propTypes = {
+    getTodos: PropTypes.func.isRequired,
+  };
+
+  state = {
+    currentDate: new Date().toString(),
+    todos: [],
+  };
+
+  addTodoItem = (item) => {
+    const { todos } = this.state;
+    // eslint-disable-next-line no-param-reassign
+    item.id = `${item.name}${item.date}`;
+    todos.push(item);
+    this.setState({ todos });
+  };
+
+  editCompletedState = (todoItem) => {
+    const item = this.state.todos.find(obj => obj.id === todoItem.id);
+    item.completed = !item.completed;
+  };
+
+  componentDidMount() {
+    this.props.getTodos().then(todos => this.setState({ todos }));
+  }
+
+  sortTodoList() {
+    return this.state.todos.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+  }
+
   render() {
     return <View style={styles.container}>
       <TodoContext.Consumer>
-        {({ todos, pushTodo }) => <ScrollView
+        {({ pushTodo }) => <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
 
-          <Todo onTodoAdd={pushTodo} todos={todos}/>
+          <Todo onTodoAdd={pushTodo} todos={this.sortTodoList()}/>
         </ScrollView>}
       </TodoContext.Consumer>
     </View>;
