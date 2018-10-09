@@ -7,38 +7,52 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
+import DatePicker from 'react-native-datepicker';
 import Colors from '../../constants/Colors';
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'column',
   },
-  formContainer: {
-    paddingTop: 10,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+  textContainer: {
     display: 'flex',
     flexDirection: 'row',
+
+    marginLeft: '5%',
+    marginRight: '5%',
+    width: 'auto',
+    paddingTop: 10,
   },
-  header: {
+  dateContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginLeft: '5%',
+    marginRight: '5%',
+    width: 'auto',
   },
   textInput: {
     backgroundColor: Colors.tabIconDefault,
     paddingLeft: 10,
     paddingRight: 10,
-    height: 30,
+    height: 35,
     width: 250,
+  },
+  header: {
+
   },
   button: {
     paddingTop: 0,
     paddingBottom: 0,
-    height: 30,
+    height: 35,
     backgroundColor: Colors.buttonBackground,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: Colors.buttonBorder,
+  },
+  spacer: {
+    width: 30,
+    height: 30,
   },
 });
 
@@ -47,6 +61,7 @@ export default class TodoInput extends Component {
     super(props);
     this.state = {
       text: '',
+      date: null,
     };
   }
 
@@ -64,7 +79,31 @@ export default class TodoInput extends Component {
         <Text style={styles.header}>
           New TODO
         </Text>
-        <View style={styles.formContainer}>
+        <View style={styles.dateContainer}>
+          <DatePicker
+            mode='date'
+            placeholder={this.state.date ? this.state.date.toString() : 'select date'}
+            format='YYYY-MM-DD'
+            minDate='2000-01-01'
+            maxDate='2050-12-31'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            showIcon={true}
+            customStyles={{
+              dateTouchBody: {
+                width: 300,
+              },
+              dateInput: {
+                fontcolor: Colors.errorBackground,
+              },
+            }}
+            onDateChange={(date) => {
+              this.setState({ date });
+            }}
+          />
+          <View style={styles.spacer}/>
+        </View>
+        <View style={styles.textContainer}>
           <TextInput
             style={styles.textInput}
             onChangeText={this.changeTextHandler}
@@ -73,11 +112,11 @@ export default class TodoInput extends Component {
           <Button
             buttonStyle={styles.button}
             underlayColor={Colors.tabIconDefault}
-            title = {'Add'}
+            title={'Add'}
             onPress={() => {
               this.props.onTodoAdd({
                 name: this.state.text,
-                date: new Date().toString(),
+                date: this.state.date,
               });
             }}
           />
