@@ -4,7 +4,9 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import PropTypes from 'prop-types';
+
+import { TodoContext } from '../utils/TodoContext';
+
 import Todo from '../components/Todo/index';
 import Colors from '../constants/Colors';
 
@@ -23,32 +25,17 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
-  static propTypes = {
-    getTodos: PropTypes.func.isRequired,
-  };
-
-  state = {
-    currentDate: new Date().toString(),
-    todos: [],
-  };
-
-  addTodoItem = (item) => {
-    const { todos } = this.state;
-    todos.push(item);
-    this.setState({ todos });
-  };
-
-  componentDidMount() {
-    this.props.getTodos().then(todos => this.setState({ todos }));
-  }
-
+  // eslint-disable-next-line class-methods-use-this
   render() {
-    return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <Todo onTodoAdd={this.addTodoItem} todos={this.state.todos}/>
-        </ScrollView>
-      </View>
-    );
+    return <View style={styles.container}>
+      <TodoContext.Consumer>
+        {({ todos, pushTodo }) => <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}>
+
+          <Todo onTodoAdd={pushTodo} todos={todos}/>
+        </ScrollView>}
+      </TodoContext.Consumer>
+    </View>;
   }
 }

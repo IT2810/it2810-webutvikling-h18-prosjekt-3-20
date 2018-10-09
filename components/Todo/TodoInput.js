@@ -67,7 +67,7 @@ export default class TodoInput extends Component {
 
   static propTypes = {
     onTodoAdd: PropTypes.func.isRequired,
-  }
+  };
 
   changeTextHandler = (text) => {
     this.setState({ text });
@@ -89,14 +89,6 @@ export default class TodoInput extends Component {
             confirmBtnText='Confirm'
             cancelBtnText='Cancel'
             showIcon={true}
-            customStyles={{
-              dateTouchBody: {
-                width: 300,
-              },
-              dateInput: {
-                fontcolor: Colors.errorBackground,
-              },
-            }}
             onDateChange={(date) => {
               this.setState({ date });
             }}

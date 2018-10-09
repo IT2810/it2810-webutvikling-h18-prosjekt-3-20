@@ -6,12 +6,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 
-const mockedItems = [{ name: 'test', date: '2017-08-07' }];
-
 const HomeStack = createStackNavigator({
-  Home: {
-    screen: props => <HomeScreen {...props} getTodos={async () => mockedItems} />,
-  },
+  Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {

@@ -13,6 +13,8 @@ import {
 } from 'expo';
 import PropTypes from 'prop-types';
 
+import { TodoContext, context } from './utils/TodoContext';
+
 import AppNavigator from './navigation/AppNavigator';
 import colors from './constants/Colors';
 
@@ -29,7 +31,33 @@ export default class App extends React.Component {
   };
 
   state = {
+    /**
+     * Used by TodoContext.Provider
+     * @var {array} Array of todos registered for the application
+     * */
+    todos: [],
+
+
     isLoadingComplete: false,
+  };
+
+  componentDidMount() {
+    // Fetch any stored todos from the context or storage
+    context.getTodos().then(todos => this.setState({ todos }));
+  }
+
+  /**
+   * Pushes a new todo onto the stored todos,
+   * and saves it
+   * @param: {object} todo
+   * @return {Promise}
+   * */
+  pushTodo = async (todo) => {
+    const savedTodos = await context.saveTodos(this.state.todos.concat([todo]));
+
+    this.setState({ todos: savedTodos });
+
+    return savedTodos;
   };
 
   render() {
@@ -43,7 +71,12 @@ export default class App extends React.Component {
 
     return <View style={styles.container}>
       {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
-      <AppNavigator/>
+      <TodoContext.Provider value={{
+        todos: this.state.todos,
+        pushTodo: this.pushTodo,
+      }}>
+        <AppNavigator/>
+      </TodoContext.Provider>
     </View>;
   }
 
