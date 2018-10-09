@@ -90,6 +90,11 @@ export default class TodoInput extends Component {
             cancelBtnText='Cancel'
             showIcon={true}
             onDateChange={this.changeSelectedDate}
+            customStyles={{
+              dateTouchBody: {
+                width: 300,
+              },
+            }}
           />
           <View style={styles.spacer}/>
         </View>

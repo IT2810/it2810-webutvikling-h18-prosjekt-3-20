@@ -17,10 +17,12 @@ export default class TodoList extends Component {
   };
 
   render() {
+    // sort todolist on date so that the flat list is rendered in chronological order
+    const sortedTodos = this.props.todos.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
     return (
       <List>
         <FlatList
-          data={this.props.todos}
+          data={sortedTodos}
           extraData={this.props}
           renderItem={({ item }) => (
             <ListItem
