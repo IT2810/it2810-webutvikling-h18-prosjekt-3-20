@@ -14,10 +14,9 @@ export default class Todo extends Component {
   };
 
   render() {
-    return (
-      <ScrollView keyboardShouldPersistTaps={'always'}>
-        <TodoInput onTodoAdd={this.props.onTodoAdd}/>);
-        <TodoList todos={this.props.todos} />
-      </ScrollView>);
+    return <ScrollView keyboardShouldPersistTaps={'always'}>
+      <TodoInput onTodoAdd={this.props.onTodoAdd}/>);
+      <TodoList todos={this.props.todos}/>
+    </ScrollView>;
   }
 }

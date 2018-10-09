@@ -38,9 +38,7 @@ const styles = StyleSheet.create({
     height: 35,
     width: 250,
   },
-  header: {
-
-  },
+  header: {},
   button: {
     paddingTop: 0,
     paddingBottom: 0,
@@ -80,9 +78,7 @@ export default class TodoInput extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>
-          New TODO
-        </Text>
+        <Text style={styles.header}>New TODO</Text>
         <View style={styles.dateContainer}>
           <DatePicker
             mode='date'

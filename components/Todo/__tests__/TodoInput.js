@@ -6,8 +6,8 @@ import TodoInput from '../TodoInput';
 
 describe('<TodoInput/>', () => {
   it('renders without breaking', () => {
-    const component = renderer.create(<TodoInput onTodoAdd={jest.fn()}/>).toJSON();
-    expect(component).toBeTruthy();
+    const tree = renderer.create(<TodoInput onTodoAdd={jest.fn()}/>).toJSON();
+    expect(tree).toBeTruthy();
   });
 
   it('should pass the new todo to callback', () => {

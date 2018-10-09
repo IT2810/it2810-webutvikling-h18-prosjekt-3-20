@@ -8,7 +8,7 @@ import {
 } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
-export default class TodoInput extends Component {
+export default class TodoList extends Component {
   static propTypes = {
     todos: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,

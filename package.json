@@ -20,10 +20,10 @@
     "setupTestFrameworkScriptFile": "<rootDir>setupTests.js",
     "coverageThreshold": {
       "global": {
-        "branches": 75,
-        "functions": 65,
-        "lines": 75,
-        "statements": -10
+        "branches": 70,
+        "functions": 60,
+        "lines": 70,
+        "statements": -20
       }
     }
   },
