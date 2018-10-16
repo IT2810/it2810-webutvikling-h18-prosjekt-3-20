@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoList/> should render empty component 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#bbb",
+        "borderTopWidth": 1,
+        "marginTop": 20,
+      },
+      undefined,
+    ]
+  }
+/>
+`;
+
+exports[`<TodoList/> should render filled component 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#bbb",
+        "borderTopWidth": 1,
+        "marginTop": 20,
+      },
+      undefined,
+    ]
+  }
+/>
+`;

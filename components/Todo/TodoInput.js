@@ -1,58 +1,123 @@
 import React, { Component } from 'react';
 import {
   Text,
-  TextInput,
   View,
   StyleSheet,
+  TextInput,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
+import DatePicker from 'react-native-datepicker';
 import Colors from '../../constants/Colors';
-
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'column',
+    marginTop: '7%',
+    marginLeft: '5%',
+    marginRight: '5%',
+    width: 'auto',
+  },
+  textContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingTop: 10,
+  },
+  dateContainer: {
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    width: 'auto',
   },
   textInput: {
-    paddingLeft: 10,
-    width: 300,
-    height: 40,
     backgroundColor: Colors.tabIconDefault,
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: 35,
+    width: 250,
+  },
+  header: {
+    fontSize: 20,
   },
   button: {
-    marginRight: 40,
-    marginLeft: 40,
-    marginTop: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 0,
+    paddingBottom: 0,
+    height: 35,
     backgroundColor: Colors.buttonBackground,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: Colors.buttonBorder,
+  },
+  spacer: {
+    width: 30,
+    height: 30,
   },
 });
 
 export default class TodoInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: 'useless placeholder' };
+    this.state = {
+      text: '',
+      // Get today at YYYY-MM-DD format
+      date: new Date().toISOString().slice(0, 10),
+    };
   }
+
+  static propTypes = {
+    onTodoAdd: PropTypes.func.isRequired,
+  };
+
+  changeTextHandler = (text) => {
+    this.setState({ text });
+  };
+
+  changeSelectedDate = (date) => {
+    this.setState({ date });
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          New TODO
-        </Text>
-        <TextInput
-          style={styles.textInput}
-          value={this.state.text}
-        />
-        <Button
-          buttonStyle={styles.button}
-          underlayColor={Colors.tabIconDefault}
-          title = {'Add'}onPress={() => {}}/>
+        <Text style={styles.header}>New TODO</Text>
+        <View style={styles.dateContainer}>
+          <DatePicker
+            mode='date'
+            placeholder={this.state.date ? this.state.date.toString() : 'select date'}
+            format='YYYY-MM-DD'
+            minDate='2000-01-01'
+            maxDate='2050-12-31'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            showIcon={true}
+            onDateChange={this.changeSelectedDate}
+            customStyles={{
+              dateTouchBody: {
+                width: 300,
+              },
+            }}
+          />
+          <View style={styles.spacer}/>
+        </View>
+        <View style={styles.textContainer}>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={this.changeTextHandler}
+            value={this.state.text}
+          />
+          <Button
+            buttonStyle={styles.button}
+            underlayColor={Colors.tabIconDefault}
+            title={'Add'}
+            onPress={() => {
+              this.props.onTodoAdd({
+                name: this.state.text,
+                date: this.state.date,
+                completed: false,
+              });
+            }}
+          />
+        </View>
       </View>
     );
   }

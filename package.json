@@ -20,10 +20,10 @@
     "setupTestFrameworkScriptFile": "<rootDir>setupTests.js",
     "coverageThreshold": {
       "global": {
-        "branches": 75,
-        "functions": 65,
-        "lines": 75,
-        "statements": -10
+        "branches": 70,
+        "functions": 60,
+        "lines": 70,
+        "statements": -20
       }
     }
   },
@@ -34,6 +34,7 @@
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-calendars": "^1.21.0",
+    "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^0.19.1",
     "react-navigation": "^2.16.0"
   },

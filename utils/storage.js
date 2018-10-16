@@ -26,6 +26,15 @@ export async function save(key, data) {
   return id;
 }
 
+export async function removeByKey(key) {
+  try {
+    await AsyncStorage.removeItem(generateId(key));
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
 export async function getByKey(key) {
   const data = await AsyncStorage.getItem(generateId(key));
 

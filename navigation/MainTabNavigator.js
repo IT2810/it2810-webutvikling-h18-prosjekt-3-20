@@ -4,33 +4,10 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-
 import AgendaScreen from '../screens/AgendaScreen';
 
-const todos = [
-  {
-    date: '2018-10-14 08:30:00',
-    name: '',
-    location: '',
-  },
-  {
-    date: '2018-10-15 10:30:00',
-    name: '',
-    location: '',
-  },
-  {
-    date: '2018-10-15 09:30:00',
-    name: '',
-    location: '',
-  },
-];
-
 const HomeStack = createStackNavigator({
-  Home: {
-    screen: props => <HomeScreen
-      {...props}
-      getTodos={async () => todos} />,
-  },
+  Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {
@@ -49,7 +26,7 @@ HomeStack.navigationOptions = {
 };
 
 const AgendaStack = createStackNavigator({
-  Agenda: { screen: props => <AgendaScreen {...props} getTodos= {async () => todos}/> },
+  Agenda: AgendaScreen,
 });
 
 AgendaStack.navigationOptions = {

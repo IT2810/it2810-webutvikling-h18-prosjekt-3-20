@@ -5,6 +5,15 @@ import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
 
 import App from '../App';
 
+import MockStorage from '../utils/__mocks__/mockStorage';
+
+/**
+ * Mocking out AsyncStorage
+ * */
+const storageCache = {};
+const AsyncStorage = new MockStorage(storageCache);
+jest.setMock('AsyncStorage', AsyncStorage);
+
 describe('App snapshot', () => {
   jest.useFakeTimers();
   beforeEach(() => {

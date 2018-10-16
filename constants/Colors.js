@@ -1,6 +1,7 @@
 const tintColor = '#2f95dc';
 
 export default {
+  black: '#000000',
   backgroundColor: '#fff',
   tintColor,
   tabIconDefault: '#ccc',
@@ -15,4 +16,6 @@ export default {
   buttonBackground: '#337ab7',
   buttonBorder: '#2e6da4',
   infoText: '#2e78b7',
+  transparent: 'transparent',
+  completedTodo: '#a0a0a0',
 };
