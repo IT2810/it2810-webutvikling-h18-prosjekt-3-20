@@ -68,7 +68,7 @@ export default class MapScreen extends React.Component {
     }
 
     return <TodoContext.Consumer>
-      {() => <MapView
+      {({ todos }) => <MapView
         style={styles.map}
         initialRegion={this.state.currentRegion}
         onRegionChange={this.changeRegion}>
@@ -79,7 +79,7 @@ export default class MapScreen extends React.Component {
           strokeColor="rgba(200, 200, 255, 0.5)"
           fillColor="rgba(225, 225, 255, 0.4)"/>
 
-        <TodoMarker todo={{ title: 'Some todo', coordinate: this.state.point }}/>
+        {todos.map(todo => <TodoMarker key={`marker-${todo.name}`} todo={todo}/>)}
       </MapView>}
     </TodoContext.Consumer>;
   }

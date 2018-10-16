@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 import { Marker } from 'react-native-maps';
 
 const TodoMarker = ({ todo }) => {
-  const { title, coordinate } = todo;
+  const { name, coordinates } = todo;
 
-  return <Marker title={title} coordinate={coordinate}/>;
+  // Map shorthand keys lat and lon,
+  // to latitude and longitude
+  const coord = {
+    latitude: coordinates.lat,
+    longitude: coordinates.lon,
+  };
+
+  return <Marker title={name} coordinate={coord}/>;
 };
 TodoMarker.propTypes = {
   todo: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    coordinate: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
+    coordinates: PropTypes.object.isRequired,
   }).isRequired,
 };
 
