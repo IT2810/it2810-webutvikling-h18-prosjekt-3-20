@@ -1,15 +1,12 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import MapView, { Marker, Circle } from 'react-native-maps';
-import Colors from '../constants/Colors';
+import MapView, { Circle } from 'react-native-maps';
 import { MonoText } from '../components/StyledText';
 import { getLocation } from '../utils/geolocation';
+import { TodoContext } from '../utils/TodoContext';
+import TodoMarker from '../components/TodoMarker';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.backgroundColor,
-  },
   map: {
     flex: 1,
   },
@@ -58,6 +55,8 @@ export default class MapScreen extends React.Component {
 
   // eslint-disable-next-line
   render() {
+    // In case of fatal errors,
+    // present the plain text to the user
     if (this.state.error) {
       return <View>
         <MonoText>{this.state.error.message}</MonoText>
@@ -65,13 +64,11 @@ export default class MapScreen extends React.Component {
     }
 
     if (!this.state.currentRegion) {
-      return <View>
-        <MapView initialRegion={null}/>;
-      </View>;
+      return <View/>;
     }
 
-    return <View style={styles.container}>
-      <MapView
+    return <TodoContext.Consumer>
+      {() => <MapView
         style={styles.map}
         initialRegion={this.state.currentRegion}
         onRegionChange={this.changeRegion}>
@@ -82,8 +79,8 @@ export default class MapScreen extends React.Component {
           strokeColor="rgba(200, 200, 255, 0.5)"
           fillColor="rgba(225, 225, 255, 0.4)"/>
 
-        <Marker coordinate={this.state.point} title={'Home'}/>
-      </MapView>
-    </View>;
+        <TodoMarker todo={{ title: 'Some todo', coordinate: this.state.point }}/>
+      </MapView>}
+    </TodoContext.Consumer>;
   }
 }

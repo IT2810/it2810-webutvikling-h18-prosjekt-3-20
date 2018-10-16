@@ -9,7 +9,7 @@ export async function getLocation() {
   // Geolocation fails on android emulators,
   // with strange errors. As a fallback send a rejection
   if (Platform.OS === 'android' && !Constants.isDevice) {
-    throw new Error('Cannot fetch the geolocation on an Android Emulator. Try it on an device!');
+    throw new Error('Cannot fetch the geolocation on an Android Emulator. Try it on a device!');
   }
 
   const { status } = await Permissions.askAsync(Permissions.LOCATION);
