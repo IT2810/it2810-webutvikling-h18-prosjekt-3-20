@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
 import Colors from '../../constants/Colors';
+import { getLocation } from '../../utils/geolocation';
 
 const styles = StyleSheet.create({
   container: {
@@ -110,10 +111,18 @@ export default class TodoInput extends Component {
             underlayColor={Colors.tabIconDefault}
             title={'Add'}
             onPress={() => {
-              this.props.onTodoAdd({
-                name: this.state.text,
-                date: this.state.date,
-                completed: false,
+              // getLocation().then(console.log);
+
+              getLocation().then((coordinates) => {
+                this.props.onTodoAdd({
+                  coordinates: {
+                    lat: coordinates.coords.latitude,
+                    lon: coordinates.coords.longitude,
+                  },
+                  name: this.state.text,
+                  date: this.state.date,
+                  completed: false,
+                });
               });
             }}
           />
