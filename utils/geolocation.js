@@ -3,30 +3,22 @@
  * @return {Promise} Resolves with location, or fails with error explaining why
  * */
 import { Platform } from 'react-native';
-import { Constants } from 'expo';
+import { Constants, Permissions, Location } from 'expo';
 
-export function getLocation() {
-  return new Promise((rsv, rr) => {
-    // Geolocation fails on android emulators,
-    // with strange errors. As a fallback send a rejection
-    if (Platform.OS === 'android' && !Constants.isDevice) {
-      rr(new Error('Cannot fetch the geolocation on an Android Emulator. Try it on an device!'));
-      return;
-    }
+export async function getLocation() {
+  // Geolocation fails on android emulators,
+  // with strange errors. As a fallback send a rejection
+  if (Platform.OS === 'android' && !Constants.isDevice) {
+    throw new Error('Cannot fetch the geolocation on an Android Emulator. Try it on an device!');
+  }
 
-    navigator.geolocation.getCurrentPosition(
-      rsv,
-      (err) => {
-        console.warn('Failed to access geolocation', err);
-        rr(err);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 1000,
-      },
-    );
-  });
+  const { status } = await Permissions.askAsync(Permissions.LOCATION);
+
+  if (status !== 'granted') {
+    throw new Error('[Location Not Granted] Could not get access to geolocation in Expo');
+  }
+
+  return Location.getCurrentPositionAsync({});
 }
 
 /**
