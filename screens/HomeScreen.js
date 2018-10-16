@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 export default class HomeScreen extends React.Component {
   // eslint-disable-next-line
   render() {
-    // getLocation().then(loc => console.log(loc));
     return <View style={styles.container}>
       <TodoContext.Consumer>
         {({ todos, pushTodo, editCompletedState }) => <ScrollView
