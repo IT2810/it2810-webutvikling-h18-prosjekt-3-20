@@ -5,6 +5,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import AgendaScreen from '../screens/AgendaScreen';
+import MapScreen from '../screens/MapScreen';
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -40,7 +42,17 @@ AgendaStack.navigationOptions = {
   ),
 };
 
+const MapStack = createStackNavigator({
+  Map: MapScreen,
+});
+
+MapStack.navigationOptions = {
+  tabBarLabel: 'Maps',
+  // tabBarIcon: () => {}
+};
+
 export default createBottomTabNavigator({
   HomeStack,
   AgendaStack,
+  MapStack,
 });
