@@ -116,8 +116,8 @@ export default class TodoInput extends Component {
               getLocation().then((coordinates) => {
                 this.props.onTodoAdd({
                   coordinates: {
-                    lat: coordinates.coords.latitude,
-                    lon: coordinates.coords.longitude,
+                    latitude: coordinates.coords.latitude,
+                    longitude: coordinates.coords.longitude,
                   },
                   name: this.state.text,
                   date: this.state.date,

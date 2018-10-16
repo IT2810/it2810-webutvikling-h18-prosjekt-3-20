@@ -20,7 +20,7 @@ describe('<TodoInput/>', () => {
 
     const text = 'hello';
     const date = '2018-10-09 10:25:00';
-    const coordinates = { lat: 63.4153693875837, lon: 10.406994364784312 };
+    const coordinates = { latitude: 63.4153693875837, longitude: 10.406994364784312 };
     const completed = false;
 
     // Calls the internal proxy function to update the text and date

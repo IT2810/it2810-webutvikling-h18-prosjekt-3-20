@@ -10,8 +10,8 @@ const mockedTodos = [
     date: '2018-10-09 09:30:00',
     completed: false,
     coordinates: {
-      lat: 12.12401,
-      lon: 21.21324,
+      latitude: 12.12401,
+      longitude: 21.21324,
     },
   },
   {
@@ -19,8 +19,8 @@ const mockedTodos = [
     date: '2018-10-10 10:25:25',
     completed: true,
     coordinates: {
-      lat: 12.12401,
-      lon: 21.21324,
+      latitude: 12.12401,
+      longitude: 21.21324,
     },
   },
 ];

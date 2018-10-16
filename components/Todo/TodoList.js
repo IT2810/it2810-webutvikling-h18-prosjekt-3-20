@@ -16,8 +16,8 @@ export default class TodoList extends Component {
       date: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired,
       coordinates: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        lon: PropTypes.number.isRequired,
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
       }).isRequired,
     })).isRequired,
   };

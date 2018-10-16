@@ -17,8 +17,8 @@ export default class Todo extends Component {
       date: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired,
       coordinates: PropTypes.shape({
-        lon: PropTypes.number.isRequired,
-        lat: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        latitude: PropTypes.number.isRequired,
       }).isRequired,
     })).isRequired,
   };
@@ -35,8 +35,8 @@ export default class Todo extends Component {
     const todoDistances = [];
     todos.forEach((obj) => {
       const todoLocation = {
-        latitude: obj.coordinates.lat,
-        longitude: obj.coordinates.lon,
+        latitude: obj.coordinates.latitude,
+        longitude: obj.coordinates.longitude,
       };
 
       todoDistances.push(
