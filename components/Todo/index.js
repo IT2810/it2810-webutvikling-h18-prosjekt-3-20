@@ -49,9 +49,8 @@ export default class Todo extends Component {
 
   async componentDidMount() {
     const loc = await getLocation();
-    const { todos } = this.sortByLocation(this.props.todos, loc);
     // eslint-disable-next-line no-param-reassign
-    this.setState({ todos, loc });
+    this.setState({ loc });
   }
 
   render() {

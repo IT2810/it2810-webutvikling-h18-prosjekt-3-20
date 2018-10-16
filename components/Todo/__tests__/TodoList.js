@@ -1,7 +1,7 @@
 import { FlatList } from 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
-
+import { shallow } from 'enzyme';
 import TodoList from '../TodoList';
 
 const mockedTodos = [
@@ -38,5 +38,10 @@ describe('<TodoList/>', () => {
     expect(component.toJSON()).toMatchSnapshot();
     expect(list).toBeTruthy();
     expect(list.props.data.length).toBe(mockedTodos.length);
+  });
+  it('should pass correct number of todos to flatlist', () => {
+    const wrapper = shallow(<TodoList todos={mockedTodos} onCheckBoxPress={jest.fn()}/>);
+    const flatList = shallow(wrapper.find('FlatList').getElements()[0]);
+    expect(flatList.instance().props.data.length).toEqual(mockedTodos.length);
   });
 });
