@@ -8,7 +8,7 @@ jest.mock('../../../utils/geolocation.js');
 
 describe('<TodoInput/>', () => {
   it('renders without breaking', () => {
-    const tree = renderer.create(<TodoInput onTodoAdd={jest.fn()}/>)
+    const tree = renderer.create(<TodoInput onTodoAdd={jest.fn()} onCheckBoxPress={jest.fn()}/>)
       .toJSON();
     expect(tree)
       .toBeTruthy();
@@ -16,7 +16,7 @@ describe('<TodoInput/>', () => {
 
   it('should pass the new todo to callback', (done) => {
     const spy = jest.fn();
-    const wrapper = shallow(<TodoInput onTodoAdd={spy}/>);
+    const wrapper = shallow(<TodoInput onTodoAdd={spy} onCheckBoxPress={jest.fn()}/>);
 
     const text = 'hello';
     const date = '2018-10-09 10:25:00';

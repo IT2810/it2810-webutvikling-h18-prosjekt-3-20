@@ -7,14 +7,20 @@ import Todo from '..';
 
 describe('<Todo/>', () => {
   it('renders without breaking', () => {
-    const tree = renderer.create(<Todo onTodoAdd={jest.fn()} todos={[]}/>).toJSON;
+    const tree = renderer.create(
+      <Todo
+        onTodoAdd={jest.fn()}
+        onCheckBoxPress={jest.fn()}
+        todos={[]}
+      />,
+    ).toJSON;
 
     expect(tree).toBeTruthy();
   });
 
   it('propagates onTodoAdd to parent', () => {
     const spy = jest.fn();
-    const wrapper = shallow(<Todo onTodoAdd={spy} todos={[]}/>);
+    const wrapper = shallow(<Todo onTodoAdd={spy} onCheckBoxPress={jest.fn()} todos={[]}/>);
 
     // Force the function onTodoAdd to be called,
     // by calling a child component's prop
