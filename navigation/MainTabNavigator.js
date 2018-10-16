@@ -5,15 +5,31 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 
-const mockedItems = [{ name: 'test', date: '2017-08-07' }];
 import AgendaScreen from '../screens/AgendaScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+
+const todos = [
+  {
+    date: '2018-10-14 08:30:00',
+    name: '',
+    location: '',
+  },
+  {
+    date: '2018-10-15 10:30:00',
+    name: '',
+    location: '',
+  },
+  {
+    date: '2018-10-15 09:30:00',
+    name: '',
+    location: '',
+  },
+];
 
 const HomeStack = createStackNavigator({
   Home: {
     screen: props => <HomeScreen
       {...props}
-      getTodos={async () => mockedItems} />,
+      getTodos={async () => todos} />,
   },
 });
 
@@ -33,11 +49,12 @@ HomeStack.navigationOptions = {
 };
 
 const AgendaStack = createStackNavigator({
-  Agenda: { screen: props => <AgendaScreen {...props} getTodos= {async() => mockedItems}/>}
+  Agenda: { screen: props => <AgendaScreen {...props} getTodos= {async () => todos}/> },
 });
 
 AgendaStack.navigationOptions = {
   tabBarLabel: 'Agenda',
+  // eslint-disable-next-line react/prop-types
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -49,5 +66,4 @@ AgendaStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   AgendaStack,
-  SettingsStack,
 });
