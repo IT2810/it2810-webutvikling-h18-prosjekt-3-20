@@ -37,7 +37,6 @@ export default class App extends React.Component {
      * */
     todos: [],
 
-
     isLoadingComplete: false,
   };
 

@@ -23,7 +23,7 @@
         "branches": 70,
         "functions": 60,
         "lines": 70,
-        "statements": -20
+        "statements": -30
       }
     }
   },
@@ -37,6 +37,7 @@
     "react-native-calendars": "^1.21.0",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^0.19.1",
+    "react-native-maps": "^0.22.0",
     "react-navigation": "^2.16.0"
   },
   "devDependencies": {

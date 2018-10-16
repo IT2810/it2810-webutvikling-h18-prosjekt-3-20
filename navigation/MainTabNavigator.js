@@ -4,7 +4,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import AgendaScreen from '../screens/AgendaScreen';
+import MapScreen from '../screens/MapScreen';
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -25,12 +27,12 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const AgendaStack = createStackNavigator({
+  Agenda: AgendaScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+AgendaStack.navigationOptions = {
+  tabBarLabel: 'Agenda',
   // eslint-disable-next-line react/prop-types
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -40,7 +42,17 @@ LinksStack.navigationOptions = {
   ),
 };
 
+const MapStack = createStackNavigator({
+  Map: MapScreen,
+});
+
+MapStack.navigationOptions = {
+  tabBarLabel: 'Maps',
+  // tabBarIcon: () => {}
+};
+
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  AgendaStack,
+  MapStack,
 });
