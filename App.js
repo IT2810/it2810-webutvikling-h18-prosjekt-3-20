@@ -78,9 +78,11 @@ export default class App extends React.Component {
     this.setState({ todos: newTodos });
   };
 
-  editCompletedState = (todoItem) => {
+  editCompletedState = async (todoItem) => {
     const item = this.state.todos.find(obj => obj.id === todoItem.id);
     item.completed = !item.completed;
+    this.setState(this.state.todos);
+    await context.saveTodos(this.state.todos);
   };
 
   render() {
