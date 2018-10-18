@@ -13,8 +13,8 @@ const mockedTodos = [{
   },
   date: '2018-10-16',
   distance: 0,
-  id: 'Sadfas2018-10-16',
-  name: 'Sadfas',
+  id: '234287908375-16',
+  name: 'Bolle',
 },
 {
   completed: true,
@@ -24,8 +24,8 @@ const mockedTodos = [{
   },
   date: '2018-10-16',
   distance: 0,
-  id: 'Sadfas2018-10-16',
-  name: 'Sadfas',
+  id: '732894723h324897234982734',
+  name: 'Mat',
 },
 ];
 
@@ -35,6 +35,7 @@ describe('<Todo/>', () => {
       <Todo
         onTodoAdd={jest.fn()}
         onCheckBoxPress={jest.fn()}
+        onRemoveTodo={jest.fn()}
         todos={[]}
       />,
     ).toJSON;
@@ -45,10 +46,12 @@ describe('<Todo/>', () => {
   it('propagates onTodoAdd and onCheckBoxPress to parent', () => {
     const mockedOnTodoAdd = jest.fn();
     const mockedOnCheckBoxPress = jest.fn();
+    const mockedOnRemoveTodo = jest.fn();
     const wrapper = shallow(
       <Todo
         onTodoAdd={mockedOnTodoAdd}
         onCheckBoxPress={mockedOnCheckBoxPress}
+        onRemoveTodo={mockedOnRemoveTodo}
         todos={mockedTodos}
       />,
     );
