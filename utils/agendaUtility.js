@@ -21,6 +21,6 @@ export const collectAgendas = (items) => {
 
     agendas[item.key] = [item.body];
   });
-  console.log(agendas);
+
   return agendas;
 };
