@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     height: 35,
-    width: 250,
+    width: 208,
   },
   header: {
     fontSize: 20,
@@ -106,11 +106,8 @@ export default class TodoInput extends Component {
             cancelBtnText='Cancel'
             showIcon={true}
             onDateChange={this.changeSelectedDate}
-            customStyles={{
-              dateTouchBody: {
-                width: 300,
-              },
-            }}
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{ width: 250 }}
           />
           <View style={styles.spacer}/>
         </View>
