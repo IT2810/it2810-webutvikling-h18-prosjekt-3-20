@@ -5,19 +5,16 @@ import { Marker } from 'react-native-maps';
 const TodoMarker = ({ todo }) => {
   const { name, coordinates } = todo;
 
-  // Map shorthand keys lat and lon,
-  // to latitude and longitude
-  const coord = {
-    latitude: coordinates.lat,
-    longitude: coordinates.lon,
-  };
-
-  return <Marker title={name} coordinate={coord}/>;
+  return <Marker title={name} coordinate={coordinates}/>;
 };
+
 TodoMarker.propTypes = {
   todo: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    coordinates: PropTypes.object.isRequired,
+    coordinates: PropTypes.shape({
+      latitude: PropTypes.any.isRequired,
+      longitude: PropTypes.any.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 

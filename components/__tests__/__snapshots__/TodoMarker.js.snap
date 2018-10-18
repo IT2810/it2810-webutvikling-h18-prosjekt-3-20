@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoMarker/> should render without failing 1`] = `
+<AIRMapMarker
+  coordinate={
+    Object {
+      "latitude": 63.41531291552631,
+      "longitude": 10.405357924043026,
+    }
+  }
+  image={undefined}
+  onPress={[Function]}
+  stopPropagation={false}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "position": "absolute",
+      },
+      undefined,
+    ]
+  }
+  title="Gkrkt"
+/>
+`;
