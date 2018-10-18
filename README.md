@@ -1,7 +1,7 @@
 Personal Information Manager
 ============================
 
-Personal Information Manager er ein applikasjon hvor du kan opprette geografisk og tidsavhengige todo elementer. Det vil si at en todo vil hugse hvor du opprettet elementet, og gir deg mulighet til å velge en forfallsdato.
+Personal Information Manager er en applikasjon hvor du kan opprette geografisk og tidsavhengige todo elementer. Det vil si at en todo vil huske hvor du opprettet elementet, og gir deg mulighet til å velge en forfallsdato.
 
 Listen over todos vil deretter være presentable i en kalender og på et kart. I tillegg kan listen sorteres over hvor nærme hver todo er geografisk plassert i forhold til deg.
 
@@ -97,7 +97,7 @@ expect(tree).toMatchSnapshot();
 ## Legge til Enzyme i React native prosjekt
 
 En problematikk som vi støtte på,
-og som var nær umulig å debugge på ein skikkelig måte var mismatch mellom `react` og `react-dom`. Denne mistmatchen førte til at enzyme klagde på oss med feilmeldingen:
+og som var nær umulig å debugge på en skikkelig måte var mismatch mellom `react` og `react-dom`. Denne mistmatchen førte til at enzyme klagde på oss med feilmeldingen:
 
 ```bash
 TypeError: window.addEventListener is not a function
