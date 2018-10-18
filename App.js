@@ -76,7 +76,6 @@ export default class App extends React.Component {
     const newTodos = this.state.todos.filter(e => e.id !== todo.id);
     await context.saveTodos(newTodos);
     this.setState({ todos: newTodos });
-    return newTodos;
   };
 
   editCompletedState = (todoItem) => {

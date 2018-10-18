@@ -161,7 +161,9 @@ exports[`<TodoItem/> should render empty component 1`] = `
             "textDecorationLine": "none",
           }
         }
-      />
+      >
+        undefinedm
+      </Text>
       <Text
         accessible={true}
         allowFontScaling={true}
