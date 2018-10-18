@@ -13,7 +13,7 @@ export default class AgendaScreen extends React.Component {
 
   render() {
     return <TodoContext.Consumer>
-    {({ todos }) => <Agenda
+      {({ todos }) => <Agenda
       items={collectAgendas(todos.map(todo => mapTodoToAgenda(todo)))}
       renderItem={item => <AgendaItem item={item}/>}
       rowHasChanged={this.rowHasChanged}
