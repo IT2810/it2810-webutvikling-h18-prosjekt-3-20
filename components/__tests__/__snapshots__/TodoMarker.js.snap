@@ -8,8 +8,10 @@ exports[`<TodoMarker/> should render without failing 1`] = `
       "longitude": 10.405357924043026,
     }
   }
+  description="Due: 2018-10-20"
   image={undefined}
   onPress={[Function]}
+  pinColor="#FF5555"
   stopPropagation={false}
   style={
     Array [

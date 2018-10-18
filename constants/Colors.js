@@ -18,4 +18,6 @@ export default {
   infoText: '#2e78b7',
   transparent: 'transparent',
   completedTodo: '#a0a0a0',
+  successColor: '#44FF44',
+  noticeColor: '#FF5555',
 };

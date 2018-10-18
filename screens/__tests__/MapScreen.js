@@ -3,6 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import MapScreen from '../MapScreen';
+import { TodoContext } from '../../utils/TodoContext';
 
 // Mock out Expo's permission and location api, for geolocation.js
 jest.mock('expo', () => ({
@@ -24,6 +25,22 @@ jest.mock('expo', () => ({
     })),
   },
 }));
+
+const mockedTodos = [
+  {
+    completed: false,
+    coordinates: {
+      latitude: 63.41531291552631,
+      longitude: 10.405357924043026,
+    },
+    date: '2018-10-20',
+    distance: 7,
+    id: 'Gkrkt2018-10-20',
+    name: 'Gkrkt',
+  },
+];
+
+TodoContext.Consumer = jest.fn(props => props.children({ todos: mockedTodos }));
 
 describe('<MapScreen/>', () => {
   it('should render without failing', () => {

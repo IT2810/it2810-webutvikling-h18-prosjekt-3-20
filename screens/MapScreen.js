@@ -79,7 +79,7 @@ export default class MapScreen extends React.Component {
           strokeColor="rgba(200, 200, 255, 0.5)"
           fillColor="rgba(225, 225, 255, 0.4)"/>
 
-        {todos.map(todo => <TodoMarker key={`marker-${todo.name}`} todo={todo}/>)}
+        {todos.map(todo => <TodoMarker key={`marker-${todo.id}`} todo={todo}/>)}
       </MapView>}
     </TodoContext.Consumer>;
   }
