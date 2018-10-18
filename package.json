@@ -24,6 +24,10 @@
         "functions": 60,
         "lines": 70,
         "statements": -30
+      },
+      "./utils/geolocation.js": {
+        "statements": -65,
+        "lines": 40
       }
     }
   },
