@@ -12,6 +12,7 @@ export default class Todo extends Component {
   static propTypes = {
     onTodoAdd: PropTypes.func.isRequired,
     onCheckBoxPress: PropTypes.func.isRequired,
+    onRemoveTodo: PropTypes.func.isRequired,
     todos: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
@@ -60,7 +61,11 @@ export default class Todo extends Component {
 
     return <ScrollView keyboardShouldPersistTaps={'always'}>
       <TodoInput onTodoAdd={this.props.onTodoAdd}/>
-      <TodoList todos={sorted} onCheckBoxPress={this.props.onCheckBoxPress}/>
+      <TodoList
+        todos={sorted}
+        onRemoveTodo={this.props.onRemoveTodo}
+        onCheckBoxPress={this.props.onCheckBoxPress}
+      />
     </ScrollView>;
   }
 }

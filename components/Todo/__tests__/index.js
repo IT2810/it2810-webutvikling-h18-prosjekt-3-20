@@ -5,28 +5,76 @@ import { shallow } from 'enzyme';
 
 import Todo from '..';
 
-const mockedTodos = [{
-  completed: false,
-  coordinates: {
-    latitude: 37.785834,
-    longitude: -122.406417,
+const mockedTodos = [
+  {
+    completed: true,
+    coordinates: {
+      latitude: 59.916928,
+      longitude: 10.728098,
+    },
+    date: '2017-10-16',
+    distance: 390606,
+    id: '73289---9daf=-82734',
+    name: 'Se på Slottet',
   },
-  date: '2018-10-16',
-  distance: 0,
-  id: 'Sadfas2018-10-16',
-  name: 'Sadfas',
-},
-{
-  completed: true,
-  coordinates: {
-    latitude: 37.785834,
-    longitude: -122.406417,
+  {
+    completed: false,
+    coordinates: {
+      latitude: 63.422764,
+      longitude: 10.394765,
+    },
+    date: '2018-10-16',
+    distance: 611,
+    id: '234287908375-16',
+    name: 'Feste på Samfundet',
   },
-  date: '2018-10-16',
-  distance: 0,
-  id: 'Sadfas2018-10-16',
-  name: 'Sadfas',
-},
+  {
+    completed: true,
+    coordinates: {
+      latitude: 63.450994,
+      longitude: 10.383271,
+    },
+    date: '2012-01-22',
+    distance: 3739,
+    id: '199992-234925-16',
+    name: 'Bade på Munkholmen',
+  },
+];
+
+const sortedMockedTodos = [
+  {
+    completed: false,
+    coordinates: {
+      latitude: 63.422764,
+      longitude: 10.394765,
+    },
+    date: '2018-10-16',
+    distance: 611,
+    id: '234287908375-16',
+    name: 'Feste på Samfundet',
+  },
+  {
+    completed: true,
+    coordinates: {
+      latitude: 63.450994,
+      longitude: 10.383271,
+    },
+    date: '2012-01-22',
+    distance: 3739,
+    id: '199992-234925-16',
+    name: 'Bade på Munkholmen',
+  },
+  {
+    completed: true,
+    coordinates: {
+      latitude: 59.916928,
+      longitude: 10.728098,
+    },
+    date: '2017-10-16',
+    distance: 390606,
+    id: '73289---9daf=-82734',
+    name: 'Se på Slottet',
+  },
 ];
 
 describe('<Todo/>', () => {
@@ -35,30 +83,63 @@ describe('<Todo/>', () => {
       <Todo
         onTodoAdd={jest.fn()}
         onCheckBoxPress={jest.fn()}
+        onRemoveTodo={jest.fn()}
         todos={[]}
       />,
     ).toJSON;
 
-    expect(tree).toBeTruthy();
+    expect(tree)
+      .toBeTruthy();
   });
 
   it('propagates onTodoAdd and onCheckBoxPress to parent', () => {
     const mockedOnTodoAdd = jest.fn();
     const mockedOnCheckBoxPress = jest.fn();
-    const wrapper = shallow(
-      <Todo
-        onTodoAdd={mockedOnTodoAdd}
-        onCheckBoxPress={mockedOnCheckBoxPress}
-        todos={mockedTodos}
-      />,
-    );
+    const mockedOnRemoveTodo = jest.fn();
+    const wrapper = shallow(<Todo
+      onTodoAdd={mockedOnTodoAdd}
+      onCheckBoxPress={mockedOnCheckBoxPress}
+      onRemoveTodo={mockedOnRemoveTodo}
+      todos={mockedTodos}
+    />);
 
     // Force the function onTodoAdd to be called,
     // by calling a child component's prop
-    wrapper.find('TodoInput').props().onTodoAdd();
-    expect(mockedOnTodoAdd).toHaveBeenCalled();
+    wrapper.find('TodoInput')
+      .props()
+      .onTodoAdd();
+    expect(mockedOnTodoAdd)
+      .toHaveBeenCalled();
 
-    wrapper.find('TodoList').props().onCheckBoxPress();
-    expect(mockedOnCheckBoxPress).toHaveBeenCalled();
+    wrapper.find('TodoList')
+      .props()
+      .onCheckBoxPress();
+    expect(mockedOnCheckBoxPress)
+      .toHaveBeenCalled();
+  });
+});
+
+describe('sortByLocation', () => {
+  it('should return a sorted list on unsorted input', () => {
+    const wrapper = shallow(
+      <Todo
+        onTodoAdd={jest.fn()}
+        onCheckBoxPress={jest.fn()}
+        onRemoveTodo={jest.fn()}
+        todos={mockedTodos}
+      />,
+    );
+    // Mocked to position at Gløshaugen in Trondheim
+    const mockedLoc = {
+      coords: {
+        latitude: 63.418610,
+        longitude: 10.402759,
+      },
+    };
+    const { sortByLocation } = wrapper.instance();
+    const sorted = sortByLocation(mockedTodos, mockedLoc);
+    wrapper.update();
+    expect(sorted)
+      .toEqual(sortedMockedTodos);
   });
 });

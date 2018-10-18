@@ -24,11 +24,20 @@ export default class HomeScreen extends React.Component {
   render() {
     return <View style={styles.container}>
       <TodoContext.Consumer>
-        {({ todos, pushTodo, editCompletedState }) => <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-
-          <Todo onTodoAdd={pushTodo} todos={todos} onCheckBoxPress={editCompletedState}/>
+        {({
+          todos,
+          pushTodo,
+          removeTodo,
+          editCompletedState,
+        }) => <ScrollView
+            style={styles.container}
+            contentContainerStyle={styles.contentContainer}>
+          <Todo
+            onTodoAdd={pushTodo}
+            onRemoveTodo={removeTodo}
+            todos={todos}
+            onCheckBoxPress={editCompletedState}
+          />
         </ScrollView>}
       </TodoContext.Consumer>
     </View>;

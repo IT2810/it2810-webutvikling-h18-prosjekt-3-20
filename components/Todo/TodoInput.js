@@ -14,9 +14,9 @@ import { getLocation } from '../../utils/geolocation';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    marginTop: '7%',
-    marginLeft: '5%',
-    marginRight: '5%',
+    // marginTop: '1%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     width: 'auto',
   },
   textContainer: {
@@ -33,9 +33,9 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: Colors.tabIconDefault,
     paddingLeft: 10,
-    paddingRight: 10,
+    // paddingRight: 10,
     height: 35,
-    width: 250,
+    width: 208,
   },
   header: {
     fontSize: 20,
@@ -48,10 +48,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: Colors.buttonBorder,
-  },
-  spacer: {
-    width: 30,
-    height: 30,
   },
 });
 
@@ -77,6 +73,20 @@ export default class TodoInput extends Component {
     this.setState({ date });
   };
 
+  createTodo = () => {
+    getLocation().then((coordinates) => {
+      this.props.onTodoAdd({
+        coordinates: {
+          latitude: coordinates.coords.latitude,
+          longitude: coordinates.coords.longitude,
+        },
+        name: this.state.text,
+        date: this.state.date,
+        completed: false,
+      });
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -92,39 +102,22 @@ export default class TodoInput extends Component {
             cancelBtnText='Cancel'
             showIcon={true}
             onDateChange={this.changeSelectedDate}
-            customStyles={{
-              dateTouchBody: {
-                width: 300,
-              },
-            }}
-          />
-          <View style={styles.spacer}/>
-        </View>
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{ width: 250 }}
+          />        </View>
         <View style={styles.textContainer}>
           <TextInput
             style={styles.textInput}
             onChangeText={this.changeTextHandler}
+            onSubmitEditing={this.createTodo}
+            returnKeyType="done"
             value={this.state.text}
           />
           <Button
             buttonStyle={styles.button}
             underlayColor={Colors.tabIconDefault}
             title={'Add'}
-            onPress={() => {
-              // getLocation().then(console.log);
-
-              getLocation().then((coordinates) => {
-                this.props.onTodoAdd({
-                  coordinates: {
-                    latitude: coordinates.coords.latitude,
-                    longitude: coordinates.coords.longitude,
-                  },
-                  name: this.state.text,
-                  date: this.state.date,
-                  completed: false,
-                });
-              });
-            }}
+            onPress={this.createTodo}
           />
         </View>
       </View>

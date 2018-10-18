@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import PropTypes from 'prop-types';
+import SwipeOut from 'react-native-swipeout';
 import Colors from '../../constants/Colors';
 
 const createStyles = checked => StyleSheet.create({
@@ -42,33 +43,57 @@ const checkboxWrapperStyle = StyleSheet.create({
 export default class TodoItem extends Component {
   static propTypes = {
     onCheckBoxPress: PropTypes.func.isRequired,
+    onRemoveTodo: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired,
   };
 
   state = {
     checked: this.props.item.completed,
+    activeItem: null,
   };
 
   render() {
     const styles = createStyles(this.state.checked);
+    const swipeSettings = {
+      autoClose: true,
+      onClose: () => {
+        if (this.props.item.id === this.state.activeItem && typeof direction !== 'undefined') {
+          this.setState({ activeItem: null });
+        }
+      },
+      onOpen: () => {
+        this.setState({ activeItem: this.props.item });
+      },
+      right: [
+        {
+          onPress: () => {
+            this.props.onRemoveTodo(this.state.activeItem);
+          },
+          text: 'Delete',
+          type: 'delete',
+        },
+      ],
+    };
     return (
-      <View style={styles.container}>
-        <CheckBox
-          style={styles.checkbox}
-          checked={this.props.item.completed}
-          containerStyle={checkboxWrapperStyle.container}
-          onPress={() => {
-            this.props.onCheckBoxPress(this.props.item);
-            this.setState({ checked: !this.state.checked });
-          }}
-        />
-        <Text style={styles.name}>
-          {this.props.item.name}
-        </Text>
-        <Text style={styles.date}>
-          {this.props.item.date}
-        </Text>
-      </View>
+      <SwipeOut {...swipeSettings}>
+        <View style={styles.container}>
+          <CheckBox
+            style={styles.checkbox}
+            checked={this.props.item.completed}
+            containerStyle={checkboxWrapperStyle.container}
+            onPress={() => {
+              this.props.onCheckBoxPress(this.props.item);
+              this.setState({ checked: !this.state.checked });
+            }}
+          />
+          <Text style={styles.name}>
+            {this.props.item.name}
+          </Text>
+          <Text style={styles.date}>
+            {this.props.item.date}
+          </Text>
+        </View>
+      </SwipeOut>
     );
   }
 }

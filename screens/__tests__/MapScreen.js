@@ -1,8 +1,36 @@
 import 'react-native';
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 
 import MapScreen from '../MapScreen';
+import { TodoContext } from '../../utils/TodoContext';
+
+const mockedTodos = [
+  {
+    completed: false,
+    coordinates: {
+      latitude: 63.41531291552631,
+      longitude: 10.405357924043026,
+    },
+    date: '2018-10-20',
+    distance: 7,
+    id: 'Gkrkt2018-10-20',
+    name: 'Gkrkt',
+  },
+];
+
+const mockedCoord = {
+  coords: {
+    accuracy: 65,
+    altitude: 48.78725814819336,
+    altitudeAccuracy: 10,
+    heading: -1,
+    latitude: 63.41534484650637,
+    longitude: 10.407017921963266,
+    speed: -1,
+  },
+  timestamp: 1539689316677.935,
+};
 
 // Mock out Expo's permission and location api, for geolocation.js
 jest.mock('expo', () => ({
@@ -10,24 +38,26 @@ jest.mock('expo', () => ({
     askAsync: jest.fn().mockImplementation(() => Promise.resolve({ status: 'granted' })),
   },
   Location: {
-    getCurrentPositionAsync: jest.fn().mockImplementation(() => Promise.resolve({
-      coords: {
-        accuracy: 65,
-        altitude: 48.78725814819336,
-        altitudeAccuracy: 10,
-        heading: -1,
-        latitude: 63.41534484650637,
-        longitude: 10.407017921963266,
-        speed: -1,
-      },
-      timestamp: 1539689316677.935,
-    })),
+    getCurrentPositionAsync: jest.fn().mockImplementation(() => Promise.resolve(mockedCoord)),
   },
 }));
 
+TodoContext.Consumer = jest.fn(props => props.children({ todos: mockedTodos }));
+
 describe('<MapScreen/>', () => {
-  it('should render without failing', () => {
-    const tree = renderer.create(<MapScreen/>).toJSON();
-    expect(tree).toMatchSnapshot();
+  it('should render without failing', (done) => {
+    const wrapper = shallow(<MapScreen/>);
+
+    wrapper.update();
+
+    setTimeout(() => {
+      // The snapshot doesn't provide us with much use,
+      // but it gives us a simple verification that the component didn't fail
+      expect(wrapper).toMatchSnapshot();
+
+      // Expect to have found the users position
+      expect(wrapper.state().currentRegion).not.toBe(null);
+      done();
+    }, 1);
   });
 });

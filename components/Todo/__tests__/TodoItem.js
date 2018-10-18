@@ -5,14 +5,19 @@ import TodoItem from '../TodoItem';
 
 describe('<TodoItem/>', () => {
   it('should render empty component', () => {
-    const tree = renderer.create(<TodoItem item={{}} onCheckBoxPress={jest.fn()}/>)
-      .toJSON();
+    const tree = renderer.create(
+      <TodoItem
+        item={{}}
+        onRemoveTodo={jest.fn()}
+        onCheckBoxPress={jest.fn()}
+      />,
+    ).toJSON();
     expect(tree)
       .toMatchSnapshot();
   });
   it('should run onUpdate at CheckBox press', () => {
     const spy = jest.fn();
-    const wrapper = shallow(<TodoItem onCheckBoxPress={spy} item={{}}/>);
+    const wrapper = shallow(<TodoItem onRemoveTodo={jest.fn()} onCheckBoxPress={spy} item={{}}/>);
     // console.log(wrapper.find('CheckBox'));
     wrapper.find('CheckBox').simulate('press');
 

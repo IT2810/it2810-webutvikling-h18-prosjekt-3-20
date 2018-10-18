@@ -12,7 +12,7 @@ import {
   Icon,
 } from 'expo';
 import PropTypes from 'prop-types';
-
+import guid from './utils/guid';
 import { TodoContext, context } from './utils/TodoContext';
 
 import AppNavigator from './navigation/AppNavigator';
@@ -24,6 +24,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundColor,
   },
 });
+
+/**
+ * Assigns a Global Unique IDentifier to item if it doesn't already have one
+ * */
+const assignGuidIfNull = (item) => {
+  if (!item.id) {
+    // eslint-disable-next-line no-param-reassign
+    item.id = guid();
+  }
+
+  return item;
+};
 
 export default class App extends React.Component {
   static propTypes = {
@@ -53,10 +65,17 @@ export default class App extends React.Component {
    * */
   pushTodo = async (todo) => {
     // eslint-disable-next-line no-param-reassign
-    todo.id = `${todo.name}${todo.date}`;
+    todo = assignGuidIfNull(todo);
+
     const savedTodos = await context.saveTodos(this.state.todos.concat([todo]));
     this.setState({ todos: savedTodos });
     return savedTodos;
+  };
+
+  removeTodo = async (todo) => {
+    const newTodos = this.state.todos.filter(e => e.id !== todo.id);
+    await context.saveTodos(newTodos);
+    this.setState({ todos: newTodos });
   };
 
   editCompletedState = (todoItem) => {
@@ -78,6 +97,7 @@ export default class App extends React.Component {
       <TodoContext.Provider value={{
         todos: this.state.todos,
         pushTodo: this.pushTodo,
+        removeTodo: this.removeTodo,
         editCompletedState: this.editCompletedState,
       }}>
         <AppNavigator/>
