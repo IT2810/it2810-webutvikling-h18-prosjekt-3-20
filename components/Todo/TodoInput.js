@@ -77,6 +77,20 @@ export default class TodoInput extends Component {
     this.setState({ date });
   };
 
+  createTodo = () => {
+    getLocation().then((coordinates) => {
+      this.props.onTodoAdd({
+        coordinates: {
+          latitude: coordinates.coords.latitude,
+          longitude: coordinates.coords.longitude,
+        },
+        name: this.state.text,
+        date: this.state.date,
+        completed: false,
+      });
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -104,27 +118,15 @@ export default class TodoInput extends Component {
           <TextInput
             style={styles.textInput}
             onChangeText={this.changeTextHandler}
+            onSubmitEditing={this.createTodo}
+            returnKeyType="done"
             value={this.state.text}
           />
           <Button
             buttonStyle={styles.button}
             underlayColor={Colors.tabIconDefault}
             title={'Add'}
-            onPress={() => {
-              // getLocation().then(console.log);
-
-              getLocation().then((coordinates) => {
-                this.props.onTodoAdd({
-                  coordinates: {
-                    latitude: coordinates.coords.latitude,
-                    longitude: coordinates.coords.longitude,
-                  },
-                  name: this.state.text,
-                  date: this.state.date,
-                  completed: false,
-                });
-              });
-            }}
+            onPress={this.createTodo}
           />
         </View>
       </View>
