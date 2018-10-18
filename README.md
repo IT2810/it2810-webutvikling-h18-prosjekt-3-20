@@ -5,10 +5,53 @@ Personal Information Manager er en applikasjon hvor du kan opprette geografisk o
 
 Listen over todos vil deretter være presentable i en kalender og på et kart. I tillegg kan listen sorteres over hvor nærme hver todo er geografisk plassert i forhold til deg.
 
+# Calendars
 
-# Kalender
+For å lage kalender og agenda er det brukt tredjepartskomponenter fra https://github.com/wix/react-native-calendars.
+Disse komponentene gir mulighet for stor grad av tilpassing, og alle parameterne er valgfrie. 
 
-https://github.com/wix/react-native-calendars
+## Kalender
+
+
+## Agenda
+
+Importer komponenten:
+
+```js
+Import { Agenda } from 'react-native-calendars';
+```
+Koden under viser hvordan Agenda komponenten er brukt i prosjektet. 
+
+```js
+    <Agenda
+      items={collectAgendas(todos.map(todo => mapTodoToAgenda(todo)))}
+      renderItem={item => <AgendaItem item={item}/>}
+      rowHasChanged={this.rowHasChanged}
+      selected={this.state.currentDate}
+      markedDates={{
+        [this.state.currentDate]:
+        {
+          selected: true,
+          marked: true,
+        },
+      }}/>}
+```
+
+Alle todos som vises i agendaen gis på formen
+
+```js
+items={
+    {'YYYY-MM-DD': [{name: '', time: '', location:''}],
+     'YYYY-MM-DD': [{name: '', time:'', location:''}],
+     'YYYY-MM-DD': [{name: '', time: '', location:''}, {name: '', time:'', location:''}],
+    }}
+```
+* renderItem spesifiserer hvordan hver todo skal rendres i agendalisten
+* markedDates lar deg spesifisere hvordan datoene i agendaen skal markeres. 
+* selected viser initielt valgt dag, og er satt til nåværende dato.
+
+I tillegg finnes mange flere muligheter for å tilpasse agendaen, som er godt dokumentert på https://github.com/wix/react-native-calendars.
+
 
 
 # Persistent lagring
