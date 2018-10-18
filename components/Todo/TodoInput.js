@@ -14,9 +14,9 @@ import { getLocation } from '../../utils/geolocation';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    marginTop: '7%',
-    marginLeft: '5%',
-    marginRight: '5%',
+    // marginTop: '1%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     width: 'auto',
   },
   textContainer: {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: Colors.tabIconDefault,
     paddingLeft: 10,
-    paddingRight: 10,
+    // paddingRight: 10,
     height: 35,
     width: 208,
   },
@@ -48,10 +48,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: Colors.buttonBorder,
-  },
-  spacer: {
-    width: 30,
-    height: 30,
   },
 });
 
@@ -108,9 +104,7 @@ export default class TodoInput extends Component {
             onDateChange={this.changeSelectedDate}
             // eslint-disable-next-line react-native/no-inline-styles
             style={{ width: 250 }}
-          />
-          <View style={styles.spacer}/>
-        </View>
+          />        </View>
         <View style={styles.textContainer}>
           <TextInput
             style={styles.textInput}

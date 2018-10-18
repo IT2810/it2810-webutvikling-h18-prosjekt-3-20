@@ -11,6 +11,7 @@ import TodoItem from './TodoItem';
 export default class TodoList extends Component {
   static propTypes = {
     onCheckBoxPress: PropTypes.func.isRequired,
+    onRemoveTodo: PropTypes.func.isRequired,
     todos: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
@@ -30,7 +31,11 @@ export default class TodoList extends Component {
           data={this.props.todos}
           extraData={this.props}
           renderItem={({ item }) => (
-            <TodoItem item={item} onCheckBoxPress={this.props.onCheckBoxPress}/>
+            <TodoItem
+              item={item}
+              onRemoveTodo={this.props.onRemoveTodo}
+              onCheckBoxPress={this.props.onCheckBoxPress}
+            />
           )}
           keyExtractor={(item, index) => index.toString()}
         />
