@@ -11,6 +11,8 @@ import DatePicker from 'react-native-datepicker';
 import Colors from '../../constants/Colors';
 import { getLocation } from '../../utils/geolocation';
 
+import { ErrorText } from '../StyledText';
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
@@ -52,17 +54,15 @@ const styles = StyleSheet.create({
 });
 
 export default class TodoInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      // Get today at YYYY-MM-DD format
-      date: new Date().toISOString().slice(0, 10),
-    };
-  }
-
   static propTypes = {
     onTodoAdd: PropTypes.func.isRequired,
+  };
+
+  state = {
+    text: '',
+    error: null,
+    // Get today at YYYY-MM-DD format
+    date: new Date().toISOString().slice(0, 10),
   };
 
   changeTextHandler = (text) => {
@@ -74,6 +74,11 @@ export default class TodoInput extends Component {
   };
 
   createTodo = () => {
+    if (this.state.text.length < 1) {
+      this.setState({ error: 'Please enter a description' });
+      return;
+    }
+
     getLocation().then((coordinates) => {
       this.props.onTodoAdd({
         coordinates: {
@@ -84,6 +89,9 @@ export default class TodoInput extends Component {
         date: this.state.date,
         completed: false,
       });
+
+      // Clear out the input fields
+      this.setState({ error: null, text: '' });
     });
   };
 
@@ -104,7 +112,7 @@ export default class TodoInput extends Component {
             onDateChange={this.changeSelectedDate}
             // eslint-disable-next-line react-native/no-inline-styles
             style={{ width: 250 }}
-          />        </View>
+          /> </View>
         <View style={styles.textContainer}>
           <TextInput
             style={styles.textInput}
@@ -120,6 +128,9 @@ export default class TodoInput extends Component {
             onPress={this.createTodo}
           />
         </View>
+        {this.state.error && <View>
+          <ErrorText>{this.state.error}</ErrorText>
+        </View>}
       </View>
     );
   }

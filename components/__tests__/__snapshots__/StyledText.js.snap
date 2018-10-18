@@ -1,6 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`<ErrorText/> renders correctly 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Array [
+        undefined,
+        Object {
+          "color": "#FF5555",
+        },
+      ],
+      Object {
+        "fontFamily": "space-mono",
+      },
+    ]
+  }
+>
+  Some error text
+</Text>
+`;
+
+exports[`<MonoText/> renders correctly 1`] = `
 <Text
   accessible={true}
   allowFontScaling={true}
