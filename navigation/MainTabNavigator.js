@@ -7,24 +7,26 @@ import HomeScreen from '../screens/HomeScreen';
 import AgendaScreen from '../screens/AgendaScreen';
 import MapScreen from '../screens/MapScreen';
 
+// Helper functions to generate ionicons-names
+function createIosIcon(name, focused = false) {
+  return `ios-${name}${focused ? '' : '-outline'}`;
+}
+
+function createIcon(name, focused) {
+  return Platform.OS === 'ios' ? createIosIcon(name, focused) : `md-${name}`;
+}
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Todos',
   // eslint-disable-next-line react/prop-types
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+  tabBarIcon: ({ focused }) => <TabBarIcon
+    focused={focused}
+    name={createIcon('checkmark-circle', focused)}
+  />,
 };
 
 const AgendaStack = createStackNavigator({
@@ -34,12 +36,10 @@ const AgendaStack = createStackNavigator({
 AgendaStack.navigationOptions = {
   tabBarLabel: 'Agenda',
   // eslint-disable-next-line react/prop-types
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
-    />
-  ),
+  tabBarIcon: ({ focused }) => <TabBarIcon
+    focused={focused}
+    name={createIcon('calendar', focused)}
+  />,
 };
 
 const MapStack = createStackNavigator({
@@ -47,8 +47,11 @@ const MapStack = createStackNavigator({
 });
 
 MapStack.navigationOptions = {
-  tabBarLabel: 'Maps',
-  // tabBarIcon: () => {}
+  tabBarLabel: 'Map',
+  // eslint-disable-next-line react/prop-types
+  tabBarIcon: ({ focused }) => <TabBarIcon
+    focused={focused}
+    name={createIcon('compass', focused)}/>,
 };
 
 export default createBottomTabNavigator({

@@ -269,7 +269,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
     >
       <View
         accessibilityComponentType={undefined}
-        accessibilityLabel="Home"
+        accessibilityLabel="Todos"
         accessibilityTraits={undefined}
         accessible={true}
         hitSlop={undefined}
@@ -348,7 +348,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
                 ]
               }
             >
-              
+              
             </Text>
           </View>
           <View
@@ -387,7 +387,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
                 ]
               }
             >
-              
+              
             </Text>
           </View>
         </View>
@@ -407,7 +407,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
             }
           }
         >
-          Home
+          Todos
         </Text>
       </View>
       <View
@@ -491,7 +491,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
                 ]
               }
             >
-              
+              
             </Text>
           </View>
           <View
@@ -530,7 +530,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
                 ]
               }
             >
-              
+              
             </Text>
           </View>
         </View>
@@ -555,7 +555,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
       </View>
       <View
         accessibilityComponentType={undefined}
-        accessibilityLabel="Maps"
+        accessibilityLabel="Map"
         accessibilityTraits={undefined}
         accessible={true}
         hitSlop={undefined}
@@ -612,7 +612,31 @@ exports[`App snapshot renders the root without loading screen 1`] = `
                 "width": "100%",
               }
             }
-          />
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#2f95dc",
+                    "fontSize": 26,
+                  },
+                  Object {
+                    "marginBottom": -3,
+                  },
+                  Object {
+                    "fontFamily": "ionicons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
           <View
             collapsable={undefined}
             style={
@@ -627,7 +651,31 @@ exports[`App snapshot renders the root without loading screen 1`] = `
                 "width": "100%",
               }
             }
-          />
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#ccc",
+                    "fontSize": 26,
+                  },
+                  Object {
+                    "marginBottom": -3,
+                  },
+                  Object {
+                    "fontFamily": "ionicons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
         </View>
         <Text
           accessible={true}
@@ -645,7 +693,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
             }
           }
         >
-          Maps
+          Map
         </Text>
       </View>
     </View>
