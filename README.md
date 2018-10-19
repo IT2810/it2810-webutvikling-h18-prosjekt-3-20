@@ -57,6 +57,46 @@ Brukes til å laste inn kartvisninger i applikasjoner, enten i Apple Maps eller 
 
 Bruk av biblioteket er godt dokumentert av [React-Native-Maps](https://github.com/react-community/react-native-maps). Ellers kan en også finne eksempler på bruk i `screens/MapScreen.js` og `components/TodoMarker.js`.
 
+
+## FlatList
+
+FlatList er et bibliotek som gjør det veldig enkelt å rendre lister i React Native og fungerer på tvers av plattformer. Dataelementene som skal rendres som en liste legger man ved i `data={}` og måten hvert element skal rendres på definerer man gjennom `renderItem={}`. For å sørge for at FlatListen oppdateres når dataelementene som er lagret i `this.state`endres setter man `extraData={this.state}`. I eksempelet under ligger todo-elementene lagret i `this.props.todos`, så derfor `extraData={this.props.todos}`.
+
+Dersom du ikke har et eget key-attributt, må du gi flatlisten en måte å indentifisere de ulike listeelementene på, dette kan du gjøre med `keyExtractor={}`.
+
+For dokumentasjon og fler eksempler for bruk av FlatList se:
+
+* https://facebook.github.io/react-native/docs/flatlist 
+
+### Eksempel
+
+```js
+import { FlatList } from 'react-native';
+.
+.
+.
+
+render() {
+    return (
+      <List>
+        <FlatList
+          data={this.props.todos}
+          extraData={this.props}
+          renderItem={({ item }) => (
+            <TodoItem
+              item={item}
+              onRemoveTodo={this.props.onRemoveTodo}
+              onCheckBoxPress={this.props.onCheckBoxPress}
+            />
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </List>
+    );
+  }
+```
+*Eksempel for bruk av FlatList hentet fra TodoList.js*
+
 # Persistent lagring
 
 Alle todos vil lagres persistent på mobilen, gjennom `AsyncStorage`. I tillegg har vi et abstraksjonslag mellom applikasjonen vår og `AsyncStorage`, som gir oss enkle hjelpefunksjoner for _lagring_, _henting_ og _fjerning_. Denne abstraksjonen ligger i `utils/storage.js`.
