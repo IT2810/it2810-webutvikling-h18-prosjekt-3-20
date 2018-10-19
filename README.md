@@ -5,6 +5,19 @@ Personal Information Manager er en applikasjon hvor du kan opprette geografisk o
 
 Listen over todos vil deretter være presentable i en kalender og på et kart. I tillegg kan listen sorteres over hvor nærme hver todo er geografisk plassert i forhold til deg.
 
+# Delegering og håndtering av issues
+
+## Issues
+Github Issues, sammen Github Project, ble brukt til å strukturere og delegere funksjonalitet og feil i applikasjonen.
+
+På Github project har vi et [brett](https://github.com/IT2810/it2810-webutvikling-h18-prosjekt-3-20/projects/1) som tar utgangspunkt i Kanban, med noen ekstra kolonner for bedre synlighet.
+
+## Push-pull metodikk
+På samme måte som i prosjekt 2, er det mye parprogrammering, raske iterasjoner og korte perioder. Derfor dropper vi bruken av brancher og pull request, til fordel for *push and pull* til master. Generell kodekvalitet ble verifisert gjennom precommit og prepush hooks (se punkt om [Testing](#testing)), og andre feil kunne løses på få minutter.
+
+## Sporing av tid med Toggl
+Toggl ble igjen brukt for å spore tid, hvor hver tidssporing ble linket til *Prosjekt* (Project 3) og *issue nummer* (#24). Med dette kunne vi automatisk generere en pdf-rapport som presenterte hver person sitt bidrag per prosjekt og den totale tiden brukt.
+
 # Plattformuavhengighet
 Et av kravene for prosjektet var at applikasjonen skulle fungere uavhengig av plattform. Den måtte altså fungere både på ios og Android.
 
@@ -269,3 +282,5 @@ Merk at enzyme of React native fortsatt snakker rimelig dårlig med hverandre, s
 
 Eksempler på dette blir for stort å vise i README filen, men testen `components/Todo/__tests__/TodoInput.js` er et godt eksempel på hvordan vi kan simulere knappetrykk.
 
+# Styling av applikasjon
+Målet til prosjektet var å lære om React Native og dens funksjonalitet. Å lage en "fin" applikasjon ble derfor prioritert svært lavt. Vi har fokusert å bruke styling i den grad at vi skjønner hvordan dette fungerer i React Native, og til å strukturere elementer på visningene. Applikasjonen vil derfor ikke nødvendigvis skalere bra på alle enheter.
