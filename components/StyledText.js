@@ -1,10 +1,23 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
-// eslint-disable-next-line import/prefer-default-export
-export class MonoText extends React.Component {
-  render() {
-    // eslint-disable-next-line react-native/no-inline-styles
-    return <Text {...this.props} style={[this.props.style, { fontFamily: 'space-mono' }]} />;
-  }
-}
+import Colors from '../constants/Colors';
+
+const textStyles = StyleSheet.create({
+  mono: {
+    fontFamily: 'space-mono',
+  },
+  error: {
+    color: Colors.noticeColor,
+  },
+});
+
+/**
+ * Simple styled text in mono format
+ * */
+export const MonoText = props => <Text {...props} style={[props.style, textStyles.mono]}/>;
+
+/**
+ * Text used to print errors
+ * */
+export const ErrorText = props => <MonoText {...props} style={[props.style, textStyles.error]}/>;

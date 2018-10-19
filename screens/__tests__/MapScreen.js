@@ -42,6 +42,9 @@ jest.mock('expo', () => ({
   },
 }));
 
+// A component using Consumer might fail if it isn't renderer through a parent component
+// having the Provider, because the expected values aren't passed down.
+// We mock the Consumer to give our components som mock values
 TodoContext.Consumer = jest.fn(props => props.children({ todos: mockedTodos }));
 
 describe('<MapScreen/>', () => {

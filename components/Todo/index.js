@@ -4,7 +4,6 @@ import { ScrollView } from 'react-native';
 import { getDistance } from 'geolib';
 import { getLocation } from '../../utils/geolocation';
 
-
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
 
@@ -50,7 +49,7 @@ export default class Todo extends Component {
 
   async componentDidMount() {
     const loc = await getLocation();
-    // eslint-disable-next-line no-param-reassign
+
     this.setState({ loc });
   }
 

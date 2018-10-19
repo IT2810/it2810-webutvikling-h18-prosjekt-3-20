@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import SwipeOut from 'react-native-swipeout';
 import Colors from '../../constants/Colors';
 
-const createStyles = checked => StyleSheet.create({
+const createStyles = completed => StyleSheet.create({
   container: {
     marginLeft: 10,
     marginRight: 10,
@@ -22,13 +22,13 @@ const createStyles = checked => StyleSheet.create({
   },
   name: {
     flex: 5,
-    color: checked ? Colors.completedTodo : Colors.black,
-    textDecorationLine: checked ? 'line-through' : 'none',
+    color: completed ? Colors.completedTodo : Colors.black,
+    textDecorationLine: completed ? 'line-through' : 'none',
   },
   date: {
     flex: 2,
-    color: checked ? Colors.completedTodo : Colors.black,
-    textDecorationLine: checked ? 'line-through' : 'none',
+    color: completed ? Colors.completedTodo : Colors.black,
+    textDecorationLine: completed ? 'line-through' : 'none',
   },
 });
 
@@ -53,7 +53,7 @@ export default class TodoItem extends Component {
   };
 
   render() {
-    const styles = createStyles(this.state.checked);
+    const styles = createStyles(this.props.item.completed);
     const swipeSettings = {
       autoClose: true,
       onClose: () => {
@@ -83,7 +83,6 @@ export default class TodoItem extends Component {
             containerStyle={checkboxWrapperStyle.container}
             onPress={() => {
               this.props.onCheckBoxPress(this.props.item);
-              this.setState({ checked: !this.state.checked });
             }}
           />
           <Text style={styles.name}>
