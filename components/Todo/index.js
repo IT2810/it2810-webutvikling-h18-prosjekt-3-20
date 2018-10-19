@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View } from 'react-native';
-import { getDistance } from 'geolib';
-import { getLocation } from '../../utils/geolocation';
+import { ScrollView } from 'react-native';
 
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
-import { MonoText } from '../StyledText';
 
 export default class Todo extends Component {
   static propTypes = {
@@ -24,46 +21,11 @@ export default class Todo extends Component {
     })).isRequired,
   };
 
-  state = {};
-
   sortTodosOnDate = () => this.props.todos.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 
-  sortByLocation = (todos, loc) => {
-    const currentLocation = {
-      latitude: loc.coords.latitude,
-      longitude: loc.coords.longitude,
-    };
-    const todoDistances = [];
-    todos.forEach((obj) => {
-      const todoLocation = {
-        latitude: obj.coordinates.latitude,
-        longitude: obj.coordinates.longitude,
-      };
-
-      todoDistances.push(
-        Object.assign(obj, { distance: getDistance(currentLocation, todoLocation) }),
-      );
-    });
-    todoDistances.sort((a, b) => a.distance - b.distance);
-    return todoDistances;
-  };
-
-  async componentDidMount() {
-    getLocation()
-      .then(loc => this.setState({ loc }))
-      .catch(error => this.setState({ error }));
-  }
-
   render() {
-    const sorted = this.state.loc
-      ? this.sortByLocation(this.props.todos, this.state.loc)
-      : this.props.todos;
+    const sorted = this.sortTodosOnDate();
 
-    if (this.state.error) {
-      return <View>
-        <MonoText>{this.state.error.message}</MonoText>
-      </View>;
-    }
     return <ScrollView keyboardShouldPersistTaps={'always'}>
       <TodoInput onTodoAdd={this.props.onTodoAdd}/>
       <TodoList

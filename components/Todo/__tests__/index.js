@@ -41,42 +41,6 @@ const mockedTodos = [
   },
 ];
 
-const sortedMockedTodos = [
-  {
-    completed: false,
-    coordinates: {
-      latitude: 63.422764,
-      longitude: 10.394765,
-    },
-    date: '2018-10-16',
-    distance: 611,
-    id: '234287908375-16',
-    name: 'Feste på Samfundet',
-  },
-  {
-    completed: true,
-    coordinates: {
-      latitude: 63.450994,
-      longitude: 10.383271,
-    },
-    date: '2012-01-22',
-    distance: 3739,
-    id: '199992-234925-16',
-    name: 'Bade på Munkholmen',
-  },
-  {
-    completed: true,
-    coordinates: {
-      latitude: 59.916928,
-      longitude: 10.728098,
-    },
-    date: '2017-10-16',
-    distance: 390606,
-    id: '73289---9daf=-82734',
-    name: 'Se på Slottet',
-  },
-];
-
 describe('<Todo/>', () => {
   it('renders without breaking', () => {
     const tree = renderer.create(
@@ -116,30 +80,5 @@ describe('<Todo/>', () => {
       .onCheckBoxPress();
     expect(mockedOnCheckBoxPress)
       .toHaveBeenCalled();
-  });
-});
-
-describe('sortByLocation', () => {
-  it('should return a sorted list on unsorted input', () => {
-    const wrapper = shallow(
-      <Todo
-        onTodoAdd={jest.fn()}
-        onCheckBoxPress={jest.fn()}
-        onRemoveTodo={jest.fn()}
-        todos={mockedTodos}
-      />,
-    );
-    // Mocked to position at Gløshaugen in Trondheim
-    const mockedLoc = {
-      coords: {
-        latitude: 63.418610,
-        longitude: 10.402759,
-      },
-    };
-    const { sortByLocation } = wrapper.instance();
-    const sorted = sortByLocation(mockedTodos, mockedLoc);
-    wrapper.update();
-    expect(sorted)
-      .toEqual(sortedMockedTodos);
   });
 });

@@ -73,12 +73,11 @@ export default class TodoInput extends Component {
     this.setState({ date });
   };
 
-  createTodo = () => {
+  createTodo = async () => {
     if (this.state.text.length < 1) {
       this.setState({ error: 'Please enter a description' });
       return;
     }
-
     getLocation().then((coordinates) => {
       this.props.onTodoAdd({
         coordinates: {
