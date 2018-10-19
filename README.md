@@ -3,7 +3,13 @@ Personal Information Manager
 
 Personal Information Manager er en applikasjon hvor du kan opprette geografisk og tidsavhengige todo elementer. Det vil si at en todo vil huske hvor du opprettet elementet, og gir deg mulighet til å velge en forfallsdato.
 
-Listen over todos vil deretter være presentable i en kalender og på et kart. I tillegg kan listen sorteres over hvor nærme hver todo er geografisk plassert i forhold til deg.
+Listen over todos vil deretter være presentable i en kalender og på et kart. På kartet vil fullførte todos være markert som grønne knappenåler, mens ufullførte er markert med rødt. For å slette todos swiper man til venstre på ønsket todo-element.
+## Installasjon
+For å installere:
+```console
+npm install
+npm start
+```
 
 # Delegering og håndtering av issues
 
