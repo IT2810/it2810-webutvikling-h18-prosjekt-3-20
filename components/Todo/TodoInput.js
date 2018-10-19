@@ -112,7 +112,8 @@ export default class TodoInput extends Component {
             onDateChange={this.changeSelectedDate}
             // eslint-disable-next-line react-native/no-inline-styles
             style={{ width: 250 }}
-          /> </View>
+          />
+        </View>
         <View style={styles.textContainer}>
           <TextInput
             style={styles.textInput}
