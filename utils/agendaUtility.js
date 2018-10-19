@@ -6,7 +6,7 @@ export const mapTodoToAgenda = (todo) => {
 
   return {
     key: date,
-    body: { time, name: todo.name, location: todo.location },
+    body: { time, name: todo.name },
   };
 };
 

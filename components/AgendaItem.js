@@ -18,14 +18,12 @@ const styles = StyleSheet.create({
 const AgendaItem = ({ item }) => <View style={[styles.item, { height: item.height }]}>
   {item.time && <Text style={styles.time}>{item.time}</Text>}
   <Text>{item.name}</Text>
-  <Text style={styles.location}>{item.location}</Text>
 </View>;
 
 AgendaItem.propTypes = {
   item: PropTypes.shape({
     time: PropTypes.string,
     name: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
   }).isRequired,
 };
 

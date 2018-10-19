@@ -35,14 +35,6 @@ exports[`<AgendaItem/> should render without failing 1`] = `
   >
     Test
   </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={undefined}
-  >
-    Location
-  </Text>
 </View>
 `;
 
@@ -68,14 +60,6 @@ exports[`<AgendaItem/> should render without failing 2`] = `
     ellipsizeMode="tail"
   >
     Test
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={undefined}
-  >
-    Location
   </Text>
 </View>
 `;

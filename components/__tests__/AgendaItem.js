@@ -7,11 +7,9 @@ const mockedItems = [
   {
     name: 'Test',
     time: '09:30:00',
-    location: 'Location',
   },
   {
     name: 'Test',
-    location: 'Location',
   },
 ];
 

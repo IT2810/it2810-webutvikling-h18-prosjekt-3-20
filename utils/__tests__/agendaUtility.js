@@ -5,17 +5,14 @@ const mockedTodos = [
   {
     name: 'Test 1',
     date: '2018-10-17 09:30:00',
-    location: 'Lokasjon 1',
   },
   {
     name: 'Test 2',
     date: '2018-10-17 10:30:00',
-    location: 'Lokasjon 2',
   },
   {
     name: 'Test 3',
     date: '2018-10-18 10:30:00',
-    location: 'Lokasjon 3',
   },
 ];
 
@@ -29,7 +26,6 @@ describe('mapTodoToAgenda', () => {
         body: {
           time: '09:30:00',
           name: 'Test 1',
-          location: 'Lokasjon 1',
         },
       });
   });
@@ -46,19 +42,16 @@ describe('collectAgendas', () => {
           {
             time: '09:30:00',
             name: 'Test 1',
-            location: 'Lokasjon 1',
           },
           {
             time: '10:30:00',
             name: 'Test 2',
-            location: 'Lokasjon 2',
           },
         ],
         '2018-10-18': [
           {
             time: '10:30:00',
             name: 'Test 3',
-            location: 'Lokasjon 3',
           },
         ],
       });
