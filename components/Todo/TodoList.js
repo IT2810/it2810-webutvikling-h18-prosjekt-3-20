@@ -24,7 +24,6 @@ export default class TodoList extends Component {
   };
 
   render() {
-    // sort todolist on date so that the flat list is rendered in chronological order
     return (
       <List>
         <FlatList

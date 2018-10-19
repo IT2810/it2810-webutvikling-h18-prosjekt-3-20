@@ -48,7 +48,6 @@ export default class TodoItem extends Component {
   };
 
   state = {
-    checked: this.props.item.completed,
     activeItem: null,
   };
 
@@ -56,16 +55,17 @@ export default class TodoItem extends Component {
     const styles = createStyles(this.props.item.completed);
     const swipeSettings = {
       autoClose: true,
+      onOpen: () => {
+        this.setState({ activeItem: this.props.item });
+      },
       onClose: () => {
         if (this.props.item.id === this.state.activeItem && typeof direction !== 'undefined') {
           this.setState({ activeItem: null });
         }
       },
-      onOpen: () => {
-        this.setState({ activeItem: this.props.item });
-      },
       right: [
         {
+          // When pressing delete button
           onPress: () => {
             this.props.onRemoveTodo(this.state.activeItem);
           },

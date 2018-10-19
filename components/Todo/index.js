@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { getDistance } from 'geolib';
 import { getLocation } from '../../utils/geolocation';
 
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
+import { MonoText } from '../StyledText';
 
 export default class Todo extends Component {
   static propTypes = {
@@ -48,9 +49,9 @@ export default class Todo extends Component {
   };
 
   async componentDidMount() {
-    const loc = await getLocation();
-
-    this.setState({ loc });
+    getLocation()
+      .then(loc => this.setState({ loc }))
+      .catch(error => this.setState({ error }));
   }
 
   render() {
@@ -58,6 +59,11 @@ export default class Todo extends Component {
       ? this.sortByLocation(this.props.todos, this.state.loc)
       : this.props.todos;
 
+    if (this.state.error) {
+      return <View>
+        <MonoText>{this.state.error.message}</MonoText>
+      </View>;
+    }
     return <ScrollView keyboardShouldPersistTaps={'always'}>
       <TodoInput onTodoAdd={this.props.onTodoAdd}/>
       <TodoList
