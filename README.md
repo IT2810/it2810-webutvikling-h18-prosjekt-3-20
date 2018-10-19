@@ -70,7 +70,7 @@ Bruk av biblioteket er godt dokumentert av [React-Native-Maps](https://github.co
 
 ## FlatList
 
-FlatList er et bibliotek som gjør det veldig enkelt å rendre lister i React Native og fungerer på tvers av plattformer. Dataelementene som skal rendres som en liste legger man ved i `data={}` og måten hvert element skal rendres på definerer man gjennom `renderItem={}`. For å sørge for at FlatListen oppdateres når dataelementene som er lagret i `this.state`endres setter man `extraData={this.state}`. I eksempelet under ligger todo-elementene lagret i `this.props.todos`, så derfor `extraData={this.props.todos}`.
+FlatList er et bibliotek som gjør det veldig enkelt å rendre lister i React Native og fungerer på tvers av plattformer. Dataelementene som skal rendres som en liste legger man ved i propertien `data={}` og måten hvert element skal rendres på definerer man gjennom `renderItem={}`. For å sørge for at FlatListen oppdateres når dataelementene som er lagret i `this.state`endres setter man `extraData={this.state}`. I eksempelet under ligger todo-elementene lagret i `this.props.todos`, så derfor `extraData={this.props.todos}`.
 
 Dersom du ikke har et eget key-attributt, må du gi flatlisten en måte å indentifisere de ulike listeelementene på, dette kan du gjøre med `keyExtractor={}`.
 
@@ -106,6 +106,41 @@ render() {
   }
 ```
 *Eksempel for bruk av FlatList hentet fra TodoList.js*
+
+## React Native DatePicker
+React Native DatePicker er en tredjepartskomponent for valg av dato (og tidspunkt om man ønsker). DatePicker bygger på DatePickerIOS, DatePickerAndroid og TimePickerAndroid. Dette gjør at React Native DatePicker fungerer på tvers av iOS og Android.
+
+Ved å endre `mode` propertien kan man velge om man ønsker å bruke DatePicker til å sette tidspunkt, dato eller begge deler. Dette gjøres ved å sette mode til henholdsvis: `mode='time'`, `mode='date'` eller `mode='datetime'`. DateTime kommer med et ikon som man kan velge å bruke eller ikke ved å sette `showIcon={}` til `true` eller `false`.
+
+For å se alle andre properties man kan sette og hvordan man bruker React Native DatePicker se dokumentasjonen her: 
+
+* https://github.com/xgfe/react-native-datepicker#readme
+
+### Eksempel
+```js
+import DatePicker from 'react-native-datepicker';
+.
+.
+.
+render() {
+    return (
+    <DatePicker
+		mode='date'
+		placeholder={this.state.date ? this.state.date.toString() : 'select date'}
+		format='YYYY-MM-DD'
+		minDate='2000-01-01'
+		maxDate='2050-12-31'
+		confirmBtnText='Confirm'
+		cancelBtnText='Cancel'
+		showIcon={true}
+		onDateChange={this.changeSelectedDate}
+		style={{ width: 250 }}
+	/>
+	);
+}
+```
+*Eksempel på bruk av DatePicker hentet fra TodoInput.js*
+
 
 # Persistent lagring
 
