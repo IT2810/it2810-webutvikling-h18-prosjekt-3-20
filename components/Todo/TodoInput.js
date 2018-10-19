@@ -51,6 +51,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.buttonBorder,
   },
+  errorText: {
+    maxWidth: 260,
+  },
 });
 
 export default class TodoInput extends Component {
@@ -78,11 +81,11 @@ export default class TodoInput extends Component {
       this.setState({ error: 'Please enter a description' });
       return;
     }
-    getLocation().then((coordinates) => {
+    getLocation().then((loc) => {
       this.props.onTodoAdd({
         coordinates: {
-          latitude: coordinates.coords.latitude,
-          longitude: coordinates.coords.longitude,
+          latitude: loc.coords.latitude,
+          longitude: loc.coords.longitude,
         },
         name: this.state.text,
         date: this.state.date,
@@ -91,6 +94,21 @@ export default class TodoInput extends Component {
 
       // Clear out the input fields
       this.setState({ error: null, text: '' });
+    }).catch(() => {
+      this.setState({
+        error: 'Location don\'t work in Android Emulator. '
+          + 'Use phone for better experience. Your location will'
+          + ' be mocked to Gløshaugen',
+      });
+      this.props.onTodoAdd({
+        coordinates: {
+          latitude: 63.419301,
+          longitude: 10.402234,
+        },
+        name: this.state.text,
+        date: this.state.date,
+        completed: false,
+      });
     });
   };
 
@@ -129,7 +147,7 @@ export default class TodoInput extends Component {
           />
         </View>
         {this.state.error && <View>
-          <ErrorText>{this.state.error}</ErrorText>
+          <ErrorText style={styles.errorText}>{this.state.error}</ErrorText>
         </View>}
       </View>
     );
