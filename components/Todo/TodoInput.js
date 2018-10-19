@@ -56,6 +56,13 @@ const styles = StyleSheet.create({
   },
 });
 
+const fallbackLocation = {
+  coords: {
+    latitude: 63.419301,
+    longitude: 10.402234,
+  },
+};
+
 export default class TodoInput extends Component {
   static propTypes = {
     onTodoAdd: PropTypes.func.isRequired,
@@ -81,35 +88,26 @@ export default class TodoInput extends Component {
       this.setState({ error: 'Please enter a description' });
       return;
     }
-    getLocation().then((loc) => {
-      this.props.onTodoAdd({
-        coordinates: {
-          latitude: loc.coords.latitude,
-          longitude: loc.coords.longitude,
-        },
-        name: this.state.text,
-        date: this.state.date,
-        completed: false,
-      });
 
-      // Clear out the input fields
-      this.setState({ error: null, text: '' });
-    }).catch(() => {
-      this.setState({
-        error: 'Location don\'t work in Android Emulator. '
-          + 'Use phone for better experience. Your location will'
-          + ' be mocked to Gløshaugen',
-      });
-      this.props.onTodoAdd({
-        coordinates: {
-          latitude: 63.419301,
-          longitude: 10.402234,
-        },
-        name: this.state.text,
-        date: this.state.date,
-        completed: false,
-      });
+    let location = null;
+    let error = null;
+    try {
+      location = await getLocation();
+    } catch (e) {
+      error = `${e.message}. Your location will be mocket to Gløshaugen`;
+      location = fallbackLocation;
+    }
+
+    const { latitude, longitude } = location.coords;
+
+    this.props.onTodoAdd({
+      coordinates: { latitude, longitude },
+      name: this.state.text,
+      date: this.state.date,
+      completed: false,
     });
+
+    this.setState({ error, text: '' });
   };
 
   render() {

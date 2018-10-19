@@ -38,6 +38,14 @@ const createRegionByCoordinates = (coordinates) => {
   };
 };
 
+const fallbackLocation = {
+  coords: {
+    accuracy: 500,
+    latitude: 63.419301,
+    longitude: 10.402234,
+  },
+};
+
 export default class MapScreen extends React.Component {
   state = {
     currentRegion: null,
@@ -56,8 +64,13 @@ export default class MapScreen extends React.Component {
         point: mapGeoToCoords(geo),
         currentRegion: createRegionByCoordinates(geo),
       }))
-      // Catch any errors and store it for later presentation
-      .catch(error => this.setState({ error }));
+      // Catch any errors, store it for later presentation and fallback
+      // to location "Gløshaugen"
+      .catch(error => this.setState({
+        error,
+        point: mapGeoToCoords(fallbackLocation),
+        currentRegion: createRegionByCoordinates(fallbackLocation),
+      }));
   }
 
   changeRegion = (currentRegion) => {
@@ -65,33 +78,28 @@ export default class MapScreen extends React.Component {
   };
 
   render() {
-    // In case of fatal errors,
-    // present the plain text to the user
-    if (this.state.error) {
-      return <View>
-        <MonoText>{this.state.error.message}</MonoText>
-      </View>;
-    }
-
     // Placeholder before we have any location to present
     if (!this.state.currentRegion) {
       return <View/>;
     }
 
     return <TodoContext.Consumer>
-      {({ todos }) => <MapView
-        style={styles.map}
-        initialRegion={this.state.currentRegion}
-        onRegionChange={this.changeRegion}>
+      {({ todos }) => <React.Fragment>
+        {!!this.state.error && <MonoText>{this.state.error.message}</MonoText>}
+        <MapView
+          style={styles.map}
+          initialRegion={this.state.currentRegion}
+          onRegionChange={this.changeRegion}>
 
-        <Circle
-          center={this.state.point}
-          radius={this.state.point.accuracy}
-          strokeColor="rgba(200, 200, 255, 0.5)"
-          fillColor="rgba(225, 225, 255, 0.4)"/>
+          <Circle
+            center={this.state.point}
+            radius={this.state.point.accuracy}
+            strokeColor="rgba(200, 200, 255, 0.5)"
+            fillColor="rgba(225, 225, 255, 0.4)"/>
 
-        {todos.map(todo => <TodoMarker key={`marker-${todo.id}`} todo={todo}/>)}
-      </MapView>}
+          {todos.map(todo => <TodoMarker key={`marker-${todo.id}`} todo={todo}/>)}
+        </MapView>
+      </React.Fragment>}
     </TodoContext.Consumer>;
   }
 }
