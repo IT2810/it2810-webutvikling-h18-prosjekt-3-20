@@ -5,6 +5,16 @@ Personal Information Manager er en applikasjon hvor du kan opprette geografisk o
 
 Listen over todos vil deretter være presentable i en kalender og på et kart. I tillegg kan listen sorteres over hvor nærme hver todo er geografisk plassert i forhold til deg.
 
+# Platformuavhengighet
+Et av kravene for prosjektet var at applikasjonen skulle fungere uavhengig av plattform. Den måtte altså fungere både på ios og Android.
+
+Utfordringen vi støtte på i vår gruppe, var at ingen av oss hadde en Android enhet tilgjengelig, og måtte derfor stort sett ta utgangspunkt i Android Emulatorer.
+
+Den største begrensningen vi møtte på var at, [GPS ikkje fungerer i Sketch på Android Emulatorer](https://docs.expo.io/versions/latest/sdk/location). Gjorde kartvisningen og opprettelse av todos (som trenger gps posisjon) utfordrende å teste på begge plattformer.
+
+Vi fikk derimot testet applikasjonen på en Android enhet, i løpet av prosjektperioden, hvor all funksjonalitet så ut til å fungere (Se mappen `docs/android` for skjermbilder. Sist oppdatert *17.10.2018*).
+
+Uansett tar vi forbehold om at applikasjonen kan ha funksjonelle og grafiske feil, som et resultat av at vi ikke har Android enheter tilgjengelig.
 
 # Tredjepartskomponenter
 ## React Native Calendards
