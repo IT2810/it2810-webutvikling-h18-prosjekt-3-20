@@ -41,10 +41,10 @@ Alle todos som vises i agendaen gis på formen
 
 ```js
 items={
-    {'YYYY-MM-DD': [{name: '', time: ''}],
+    'YYYY-MM-DD': [{name: '', time: ''}],
      'YYYY-MM-DD': [{name: '', time:''}],
      'YYYY-MM-DD': [{name: '', time: ''}, {name: '', time:''}],
-    }}
+    }
 ```
 * renderItem spesifiserer hvordan hver todo skal rendres i agendalisten
 * markedDates lar deg spesifisere hvordan datoene i agendaen skal markeres. 
