@@ -83,9 +83,9 @@ Bruk av biblioteket er godt dokumentert av [React-Native-Maps](https://github.co
 
 ## FlatList
 
-FlatList er et bibliotek som gjør det veldig enkelt å rendre lister i React Native og fungerer på tvers av plattformer. Dataelementene som skal rendres som en liste legger man ved i propertien `data={}` og måten hvert element skal rendres på definerer man gjennom `renderItem={}`. For å sørge for at FlatListen oppdateres når dataelementene som er lagret i `this.state`endres setter man `extraData={this.state}`. I eksempelet under ligger todo-elementene lagret i `this.props.todos`, så derfor `extraData={this.props.todos}`.
+FlatList er et bibliotek som gjør det veldig enkelt å rendre lister i React Native og fungerer på tvers av plattformer. Dataelementene som skal rendres som en liste legger man ved i propertien `data` og måten hvert element skal rendres på definerer man gjennom `renderItem`. For å sørge for at FlatListen oppdateres når dataelementene som er lagret i `this.state`endres setter man `extraData={this.state}`. I eksempelet under ligger todo-elementene lagret i `this.props.todos`, så derfor `extraData={this.props.todos}`.
 
-Dersom du ikke har et eget key-attributt, må du gi flatlisten en måte å indentifisere de ulike listeelementene på, dette kan du gjøre med `keyExtractor={}`.
+Dersom du ikke har et eget key-attributt, må du gi flatlisten en måte å indentifisere de ulike listeelementene på, dette kan du gjøre med `keyExtractor`.
 
 For dokumentasjon og fler eksempler for bruk av FlatList se:
 
@@ -99,24 +99,20 @@ import { FlatList } from 'react-native';
 .
 .
 
-render() {
-    return (
-      <List>
-        <FlatList
-          data={this.props.todos}
-          extraData={this.props}
-          renderItem={({ item }) => (
-            <TodoItem
-              item={item}
-              onRemoveTodo={this.props.onRemoveTodo}
-              onCheckBoxPress={this.props.onCheckBoxPress}
-            />
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </List>
-    );
-  }
+<List>
+<FlatList
+  data={this.props.todos}
+  extraData={this.props}
+  renderItem={({ item }) => (
+    <TodoItem
+      item={item}
+      onRemoveTodo={this.props.onRemoveTodo}
+      onCheckBoxPress={this.props.onCheckBoxPress}
+    />
+  )}
+  keyExtractor={(item, index) => index.toString()}
+/>
+</List>
 ```
 *Eksempel for bruk av FlatList hentet fra TodoList.js*
 
@@ -154,6 +150,66 @@ render() {
 ```
 *Eksempel på bruk av DatePicker hentet fra TodoInput.js*
 
+## React Native SwipeOut
+React Native SwipeOut er et bibilotek som gjør at man kan sveipe til venstre (eller høyre) på objekter og det kommer frem knapper man kan trykke på. Disse knappene kan man selv style og velge funksjonalitet på. React native har noen forhåndsdefinerte knapp-typer som man setter med `type`. I dette prosjektet brukte vi `type: delete` som brukes for å slette TODO-elementer. 
+
+`onOpen` og `onClose` brukes for å sette oppførsel når man swiper og viser eller skjuler knappene. Propertyen `right` inneholder et array som inneholder alle knappene som skal vises på høyre side. På samme måte finnes `left`. Hver knapp i arrayet tar blant annet properties som `onPress`, `text`, `color` etc. 
+
+For mer utfyllende om bruk av React Native SwipeOut, se dokumentasjonen her:
+
+* https://github.com/dancormier/react-native-swipeout
+ 
+### Eksempel
+
+```js
+import SwipeOut from 'react-native-swipeout';
+.
+.
+.
+const swipeSettings = {
+      autoClose: true,
+      onOpen: () => {
+        this.setState({ activeItem: this.props.item });
+      },
+      onClose: () => {
+        if (this.props.item.id === this.state.activeItem && typeof direction !== 'undefined') {
+          this.setState({ activeItem: null });
+        }
+      },
+      right: [
+        {
+          // When pressing delete button
+          onPress: () => {
+            this.props.onRemoveTodo(this.state.activeItem);
+          },
+          text: 'Delete',
+          type: 'delete',
+        },
+      ],
+    };
+.
+.
+.    
+<SwipeOut {...swipeSettings}>
+<View style={styles.container}>
+  <CheckBox
+    style={styles.checkbox}
+    checked={this.props.item.completed}
+    containerStyle={checkboxWrapperStyle.container}
+    onPress={() => {
+      this.props.onCheckBoxPress(this.props.item);
+    }}
+  />
+  <Text style={styles.name}>
+    {this.props.item.name}
+  </Text>
+  <Text style={styles.date}>
+    {this.props.item.date}
+  </Text>
+</View>
+</SwipeOut>
+```
+*Eksempel fra TodoItem.js*
 
 # Persistent lagring
 
