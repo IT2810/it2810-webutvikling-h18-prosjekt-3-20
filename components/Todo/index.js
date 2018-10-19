@@ -24,6 +24,7 @@ export default class Todo extends Component {
   sortTodosOnDate = () => this.props.todos.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 
   render() {
+    // Sorting list of todoElements before passing it to TodoList
     const sorted = this.sortTodosOnDate();
 
     return <ScrollView keyboardShouldPersistTaps={'always'}>

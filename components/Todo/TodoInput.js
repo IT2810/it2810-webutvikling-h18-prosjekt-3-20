@@ -94,12 +94,15 @@ export default class TodoInput extends Component {
     try {
       location = await getLocation();
     } catch (e) {
+      // Due to Android Emulators inability to fetch geoLocation, set fallback Location.
+      // Read README for more info
       error = `${e.message}. Your location will be mocket to Gløshaugen`;
       location = fallbackLocation;
     }
 
     const { latitude, longitude } = location.coords;
 
+    // When Add button is pushed
     this.props.onTodoAdd({
       coordinates: { latitude, longitude },
       name: this.state.text,

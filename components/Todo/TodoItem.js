@@ -48,11 +48,13 @@ export default class TodoItem extends Component {
   };
 
   state = {
+    // Keeps track of if/which todoItem is swiped left
     activeItem: null,
   };
 
   render() {
     const styles = createStyles(this.props.item.completed);
+    // SwipeOut properties
     const swipeSettings = {
       autoClose: true,
       onOpen: () => {
