@@ -34,15 +34,18 @@ describe('<TodoInput/>', () => {
     const coordinates = { latitude: 63.4153693875837, longitude: 10.406994364784312 };
     const completed = false;
 
-    // Calls the internal proxy function to update the text and date
+    // Calls the internal functions to update the text and date
     wrapper.instance()
       .changeTextHandler(text);
     wrapper.instance()
       .changeSelectedDate(date);
 
+    // Simulate that we submit a new todo
     wrapper.find('Button')
       .simulate('press');
 
+    // Need to wait for a tiny bit of time
+    // to let the TodoInput state update
     setTimeout(() => {
       expect(spy.mock.calls.length)
         .toBe(1);
@@ -54,6 +57,7 @@ describe('<TodoInput/>', () => {
           name: text,
         });
 
+      // Manually tell the test that we are done
       done();
     }, 1);
   });

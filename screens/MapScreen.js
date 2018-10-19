@@ -13,11 +13,20 @@ const styles = StyleSheet.create({
 });
 
 /**
- * Simple arrow-function to extract the
+ * Simply extracts the
  * coordinates from geolocation
+ *
+ * @param {object} geo
+ * @return {object}
  * */
 const mapGeoToCoords = geo => geo.coords;
 
+/**
+ * Resolves the mismatch between the geolocation module
+ * and react-native-maps
+ * @param {object} coordinates
+ * @return {object}
+ * */
 const createRegionByCoordinates = (coordinates) => {
   const { latitude, longitude } = coordinates.coords;
 
@@ -41,11 +50,13 @@ export default class MapScreen extends React.Component {
   };
 
   componentDidMount() {
+    // Fetch the current location of the user
     getLocation()
       .then(geo => this.setState({
         point: mapGeoToCoords(geo),
         currentRegion: createRegionByCoordinates(geo),
       }))
+      // Catch any errors and store it for later presentation
       .catch(error => this.setState({ error }));
   }
 
@@ -53,7 +64,6 @@ export default class MapScreen extends React.Component {
     this.setState({ currentRegion });
   };
 
-  // eslint-disable-next-line
   render() {
     // In case of fatal errors,
     // present the plain text to the user
@@ -63,6 +73,7 @@ export default class MapScreen extends React.Component {
       </View>;
     }
 
+    // Placeholder before we have any location to present
     if (!this.state.currentRegion) {
       return <View/>;
     }

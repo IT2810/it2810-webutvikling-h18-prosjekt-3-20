@@ -1,4 +1,8 @@
 
+/**
+ * Immediately resolve the promise with a
+ * hard coded coordinate
+ * */
 // eslint-disable-next-line import/prefer-default-export
 export const getLocation = jest.fn().mockImplementation(() => Promise.resolve({
   coords: {

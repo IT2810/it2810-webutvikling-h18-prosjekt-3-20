@@ -5,7 +5,7 @@ Personal Information Manager er en applikasjon hvor du kan opprette geografisk o
 
 Listen over todos vil deretter være presentable i en kalender og på et kart. I tillegg kan listen sorteres over hvor nærme hver todo er geografisk plassert i forhold til deg.
 
-# Platformuavhengighet
+# Plattformuavhengighet
 Et av kravene for prosjektet var at applikasjonen skulle fungere uavhengig av plattform. Den måtte altså fungere både på ios og Android.
 
 Utfordringen vi støtte på i vår gruppe, var at ingen av oss hadde en Android enhet tilgjengelig, og måtte derfor stort sett ta utgangspunkt i Android Emulatorer.
@@ -173,6 +173,29 @@ Vi fulgte fremgangsmåten i React dokumentasjonen https://reactjs.org/docs/conte
 * `Consumer` brukes der vi trenger tilgang til todos, eksempelvis i `screen/`-komponentene.
 
 # Testing
+I prosjektet stilte vi krav om systematisk bruk av tester og lintere, for å sikre tilstrekkelig kodekvalitet. Kravene ble automatisk fulgt opp av `precommit` hooks og `prepush` hooks (se scripts i `package.json`).
+
+* Precommit kjører linteren for å minimere typos og dårlig kode kommer med i commiter. Linteren vi bruker er ESLint, hvor reglene våres er definert i `.eslintrc`.
+* Prepush kjører testene våres, og sjekker samtidig at testene har [tilstrekkelig kodedekning](https://jestjs.io/docs/en/configuration.html#coveragethreshold-object).
+
+Scriptene kan også kjøres manuelt i terminalen
+
+```bash
+# Kjører testen en gang
+$ npm test 
+# Kjører testen i watch modus
+$ npm run test:watch
+# Kjører testen en gang og samler kodedekning
+$ npm run test:coverage
+
+# Kjør linteren
+$ npm run lint
+```
+
+## Kodedekning
+Vi stilte et globalt krav om kodedekning på ca `65%`, og gjorde nødvendige tilpasninger for de komponentene som krevde dette. Se `jest.coverageThreshold` i `package.json`, for de definerte tersklene.
+
+Referanse: https://jestjs.io/docs/en/configuration.html#coveragethreshold-object
 
 ## Snapshottesting
 
@@ -180,17 +203,19 @@ I vanlig React DOM brukes gjerne enzyme til å også håndtere snapshottesting, 
 I React native blir dette derimot litt problematisk, hvor render vil sende mange klager. Alternativt kunne `shallow` brukes,
 men denne genererer snapshot-filer som er vanskelig å lese, i React native.
 
-Beste alternativ er derfor å bruke `react-test-renderer` til å håndtere snapshottesting av enkle komponenter,
-fordi vi da får snapshot-filer som er lesbare av et menneske. Eksempel på dette ligger under:
+Det beste alternativet er derfor å bruke `react-test-renderer` til å håndtere snapshottesting av enkle komponenter,
+fordi vi da får snapshot-filer som er *lesbare av et menneske*. Eksempel på dette ligger under:
 
 ```jsx
 import { MonoText } from 'styled-text';
 
-const tree = renderer.create(<MonoText>Snapshot test!</MonoText>).toJSON();
-expect(tree).toMatchSnapshot();
+it('should render properly', () => {
+  const tree = renderer.create(<MonoText>Snapshot test!</MonoText>).toJSON();
+  expect(tree).toMatchSnapshot();
+});
 ```
 
-## Legge til Enzyme i React native prosjekt
+## Enzyme i React Native
 
 En problematikk som vi støtte på,
 og som var nær umulig å debugge på en skikkelig måte var mismatch mellom `react` og `react-dom`. Denne mistmatchen førte til at enzyme klagde på oss med feilmeldingen:
@@ -201,5 +226,11 @@ TypeError: window.addEventListener is not a function
 
 Den enkle løsningen var bare å tvinge `react@<versjon>` og `react-dom@<version>` til å være like.
 
-> Merk at enzyme of React native fortsatt snakker rimelig dårlig med hverandre, så i flere tilfeller er det bedre å bruke react-test-renderer
+Merk at enzyme of React native fortsatt snakker rimelig dårlig med hverandre, så i flere tilfeller er det bedre å bruke react-test-renderer. Verdien av Enzyme kommer når vi trenger å interagere med komponentene:
+
+* Simulere knappetrykk
+* Oppdatere en komponents tilstand
+* osv.
+
+Eksempler på dette blir for stort å vise i README filen, men testen `components/Todo/__tests__/TodoInput.js` er et godt eksempel på hvordan vi kan simulere knappetrykk.
 
